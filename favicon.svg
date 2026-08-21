@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MK">
+  <style>
+    .plate{fill:#121211}
+    .glyph{fill:#F4F3EE}
+    .rule{fill:#2B4FFF}
+    @media (prefers-color-scheme: dark){
+      .plate{fill:#F3F2EC}
+      .glyph{fill:#121211}
+      .rule{fill:#7E96FF}
+    }
+  </style>
+  <rect class="plate" width="64" height="64" rx="14"/>
+  <!-- M -->
+  <path class="glyph" d="M12 44V20h5.4l6.1 12.4L29.6 20H35v24h-5V30.6l-4.6 9.2h-3.8L17 30.6V44z"/>
+  <!-- K -->
+  <path class="glyph" d="M39 44V20h5v9.9l8-9.9h6.1l-8.8 10.6L58.4 44h-6.2l-6.4-9.6L44 36.6V44z"/>
+  <!-- the one accent: a rule under the mark -->
+  <rect class="rule" x="12" y="48" width="23" height="3" rx="1.5"/>
+</svg>

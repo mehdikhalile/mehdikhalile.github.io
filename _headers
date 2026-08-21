@@ -1,0 +1,10 @@
+# style.css and app.js carry no hash, so a deploy otherwise leaves a returning
+# visitor on the old stylesheet with the new markup for as long as the default
+# cache lasts. no-cache means revalidate, not do not store. img/ and lib/ are
+# deliberately left on the default: they are large and they rarely change.
+/style.css
+  Cache-Control: no-cache
+/app.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache

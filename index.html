@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mehdi Khalile, Marketing &amp; Strategy</title>
+<meta name="description" content="Mehdi Khalile. Marketing professional based in Casablanca. Market analysis, project coordination, reporting, and AI-assisted operations.">
+<meta name="author" content="Mehdi Khalile">
+
+<!-- og:image MUST be an absolute URL. It was `img/og.jpg` until 2026-08-21 and
+     the spec requires a full one: LinkedIn, WhatsApp and Slack resolve a relative
+     path inconsistently or not at all, which is a link that previews with no
+     picture at all. Everything here is absolute for the same reason.
+
+     THESE CARRY THE HOSTNAME. If the site moves to mehdikhalile.com, every URL
+     in this block moves with it, or the card keeps pointing at pages.dev.
+
+     ?v=2 is deliberate. Scrapers cache the image by its URL for days, so a card
+     rebuilt at the same path keeps serving the old picture; bump the number
+     whenever scripts/og-card.mjs is re-run. -->
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://mehdi-khalile.pages.dev/">
+<meta property="og:title" content="Mehdi Khalile, Marketing &amp; Strategy">
+<meta property="og:description" content="Market analysis turned into plans a team can actually execute. Casablanca, Morocco. Open to opportunities.">
+<meta property="og:image" content="https://mehdi-khalile.pages.dev/img/og.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mehdi Khalile, Marketing and Strategy, Casablanca">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mehdi Khalile, Marketing &amp; Strategy">
+<meta name="twitter:description" content="Market analysis turned into plans a team can actually execute. Casablanca, Morocco.">
+<meta name="twitter:image" content="https://mehdi-khalile.pages.dev/img/og.jpg?v=2">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/mehdi-portrait.webp" type="image/webp">
+<link rel="stylesheet" href="style.css">
+<script>
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+  try{
+    var L = new URLSearchParams(location.search).get('lang') || localStorage.getItem('mk-lang');
+    if (L === 'fr') document.documentElement.lang = 'fr';
+  }catch(e){}
+</script>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<header class="bar">
+  <a class="mono monogram" href="#top" aria-label="Mehdi Khalile, back to top">MK</a>
+
+  <nav class="bar-nav" aria-label="Sections">
+    <a href="#profile"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c.6-3.8 3.6-5.8 7.2-5.8s6.6 2 7.2 5.8"/></svg></i><span class="bn-t" data-fr="Profil">Profile</span></a>
+    <a href="#journey"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.4v17.2"/><circle cx="7" cy="7.2" r="2"/><circle cx="7" cy="16.4" r="2"/><path d="M11.4 7.2h8M11.4 16.4h6"/></svg></i><span class="bn-t" data-fr="Parcours">Journey</span></a>
+    <a href="#projects"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 8.4 12 4.2l8.6 4.2L12 12.6 3.4 8.4Z"/><path d="M3.4 12.6 12 16.8l8.6-4.2"/><path d="M3.4 16.6 12 20.8l8.6-4.2"/></svg></i><span class="bn-t" data-fr="Projets">Projects</span></a>
+    <a href="#skills"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 18.6a9 9 0 1 1 16.8 0"/><path d="M12 18.6 16 11"/><circle cx="12" cy="18.6" r="1.5"/></svg></i><span class="bn-t" data-fr="Compétences">Skills</span></a>
+    <a href="#contact"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="M2.8 7 12 13.2 21.2 7"/></svg></i><span class="bn-t" data-fr="Contact">Contact</span></a>
+  </nav>
+
+  <div class="bar-tools">
+    <button class="tool" id="lang" type="button" aria-label="Passer en français" title="Français">
+      <span class="mono">EN</span><span class="tool-sep"></span><span class="mono off">FR</span>
+    </button>
+    <a class="cta" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+       target="_blank" rel="noopener" data-fr="Me contacter">Get in touch</a>
+
+    <!-- Below 920 the five section links leave the bar. Something has to carry
+         them or a ten screen CV has no navigation at all on a phone, which is
+         what shipped. The label is written by JS, not by data-fr, because it
+         says two different words depending on whether the overlay is open. -->
+    <button class="menu-btn mono" id="menubtn" type="button"
+            aria-expanded="false" aria-controls="ovl">Menu</button>
+  </div>
+</header>
+
+<!-- The overlay carries the links and the one action, so the bar does not have
+     to. Same mechanism as the section rules: a clip-path wipe, and each link
+     rides out from behind its own mask on a stagger. -->
+<div class="ovl" id="ovl" aria-hidden="true">
+  <div class="ovl-in">
+    <nav class="ovl-links" aria-label="Sections">
+      <a href="#profile"><span data-fr="Profil">Profile</span></a>
+      <a href="#journey"><span data-fr="Parcours">Journey</span></a>
+      <a href="#projects"><span data-fr="Projets">Projects</span></a>
+      <a href="#skills"><span data-fr="Compétences">Skills</span></a>
+      <a href="#contact"><span data-fr="Contact">Contact</span></a>
+    </nav>
+    <div class="ovl-side">
+      <p class="mono ovl-lab" data-fr="Me contacter">Get in touch</p>
+      <a class="ovl-mail" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+         target="_blank" rel="noopener">meehdikhalile@gmail.com</a>
+      <a class="ovl-sec" href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/"
+         target="_blank" rel="noopener">LinkedIn</a>
+      <p class="ovl-loc mono" data-fr="Casablanca, Maroc">Casablanca, Morocco</p>
+    </div>
+  </div>
+</div>
+
+<!-- The standing panel. The portrait does not scroll: it is fixed beside the
+     column and the whole CV moves past it. Below 980 it cannot hold a column of
+     its own, so it becomes the top of the page and scrolls away like anything
+     else. -->
+<aside class="side">
+  <div class="side-media">
+    <figure class="figure">
+      <!-- 52KB against 116KB for the same frame. The JPEG stays as the fallback
+           and is what anything without WebP loads. -->
+      <span class="fig-base">
+        <picture>
+          <source srcset="img/mehdi-portrait.webp" type="image/webp">
+          <img src="img/mehdi-portrait.jpg" alt="Mehdi Khalile" id="shot"
+               width="1024" height="1536" fetchpriority="high">
+        </picture>
+      </span>
+    </figure>
+    <span class="side-veil" aria-hidden="true"></span>
+  </div>
+
+  <!-- Mobile only. A plain circular avatar, the shape the reference uses. The
+       head used to stand out of the ring and it read as a cut-out pasted on a
+       disc, so the figure is inside the circle now and the circle is the frame. -->
+  <div class="avatar" aria-hidden="true">
+    <picture>
+      <source srcset="img/mehdi-portrait.webp" type="image/webp">
+      <img src="img/mehdi-portrait.jpg" alt="" width="1024" height="1536">
+    </picture>
+  </div>
+
+</aside>
+
+<main id="top">
+
+  <!-- hero -->
+  <!-- lit-on is in the markup, not added by script: with no JS the class would
+       never arrive and the light could never be turned on. -->
+  <section class="hero lit-on">
+
+
+
+
+    <div class="shell hero-in">
+      <div class="side-id">
+        <div class="side-who">
+        <h1 class="side-name"><span class="sn-w"><span>Mehdi</span></span> <span class="sn-w"><span>Khalile</span></span></h1>
+        <i class="sn-rule" aria-hidden="true"></i>
+        <p class="side-role mono" data-fr="Marketing &amp; stratégie">Marketing &amp; Strategy</p>
+        </div>
+        <!-- Two tiles and nothing else. A word beside a mark that already says
+             Email is the label naming what the label is on, and a pill around a
+             tile is two containers for one thing. iOS proportions: a 22%
+             squircle, the glyph at about half the tile, a lit top edge, glass
+             rather than a fill, and the shadow doing the work a border was
+             doing. The marks are the page's own, not the services': four brand
+             colours on a graded photograph is the one thing on this panel that
+             would not belong to it. The name lives on the accessible label,
+             which is the only place it is needed. -->
+        <div class="side-reach">
+          <p class="mono reach-lab" data-fr="Me contacter">Get in touch</p>
+          <p class="side-links">
+            <a class="app" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+               target="_blank" rel="noopener" data-fr-label="Email" aria-label="Email">
+              <svg class="ico ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.4"/>
+                <path class="flap" d="M2.6 7.1 12 13.3 21.4 7.1"/>
+              </svg></a>
+            <a class="app" href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/"
+               target="_blank" rel="noopener" aria-label="LinkedIn">
+              <!-- The letterform alone. The mark's own rounded box is dropped
+                   here because the tile IS that box, and drawing it again inside
+                   gives two squircles inside one another. -->
+              <svg class="ico ico-li" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle class="li-d" cx="5.6" cy="5.2" r="1.5" fill="currentColor" stroke="none"/>
+                <path class="li-i" d="M5.6 10.2v8.4"/>
+                <path class="li-n" d="M11.4 18.6v-8.4m0 3.1a3.4 3.4 0 0 1 6.8 0v5.3"/>
+              </svg></a>
+          </p>
+        </div>
+      </div>
+
+      <p class="mono kicker">
+        <span class="live" aria-hidden="true"></span>
+        <span class="k-t" data-fr="Ouvert aux opportunités">Open to opportunities</span>
+        <span class="dot"></span>
+        <span class="k-t" data-fr="Casablanca, Maroc">Casablanca, Morocco</span>
+      </p>
+
+
+      <h2 class="hero-h" data-fr="Marketing &amp; stratégie">Marketing &amp; Strategy</h2>
+
+
+      <p class="lede" data-fr="Professionnel du marketing titulaire d’un Master, avec une expérience en analyse de marché, coordination de projets, reporting et collaboration transversale en environnement digital.">Marketing professional with a Master’s degree and experience in market analysis, project coordination, reporting, and cross-functional collaboration in digital environments.</p>
+
+      <div class="hero-act">
+        <!-- Gmail's own mailto handler, the one Chrome registers. ?view=cm was
+             here and it resolves to the standalone full screen composer with or
+             without fs=1: that page is built to be a popup and dismisses itself
+             when it lands in a tab, so the compose window flashed up and closed.
+             extsrc=mailto opens the full Gmail interface with the compose
+             pre-filled instead, and stays. -->
+        <a class="btn btn-solid btn-ico" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+           target="_blank" rel="noopener">
+          <svg class="ico ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.4"/>
+            <path class="flap" d="M2.6 7.1 12 13.3 21.4 7.1"/>
+          </svg>
+          <span data-fr="Email">Email</span>
+        </a>
+
+        <a class="btn" href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+
+
+    </div>
+
+
+    <span class="scroller mono" aria-hidden="true" data-fr="Défiler">Scroll</span>
+  </section>
+
+  <!-- 01 profile -->
+  <section class="sec sec-wide" id="profile">
+    <div class="shell">
+      <div class="wide-head">
+        <h2 data-fr="Profil">Profile</h2>
+        <i class="rule" aria-hidden="true"></i>
+      </div>
+
+      <p class="statement" data-fr="Je transforme l’analyse de marché en plans que les équipes peuvent réellement exécuter. Master en marketing stratégique, une expérience produit et acquisition en environnement digital, et l’IA utilisée comme outil de travail quotidien plutôt que comme argument.">I turn market analysis into plans teams can actually execute. Master’s in strategic marketing, hands-on product and acquisition work in a digital environment, and AI used as a daily working tool rather than a talking point.</p>
+
+      <!-- The facts on the left, the strengths on the right, and no paragraph in
+           either. These are character rather than discipline, Mehdi 2026-08-20:
+           audacious, takes the initiative, an eye for quality.
+
+           First person throughout, Mehdi 2026-08-21, which is the voice the
+           statement above them already uses: I am, I take, I have.
+
+           Which puts a claim about himself at the head of every row, and that
+           is the part of a CV nobody believes. The line under each one is what
+           stops it being filler: it says what the trait looks like when it
+           happens, in the concrete, so the reader is given something to picture
+           rather than something to agree with. Write the behaviour, never a
+           synonym for the heading. -->
+      <div class="profile-body">
+
+        <div class="pb-col">
+          <p class="mono mt-lab" data-fr="En bref">In brief</p>
+          <ul class="facts">
+            <li class="rv">
+              <span class="fx-i" aria-hidden="true">
+                <svg class="ico ico-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3.4 2.6 8 12 12.6 21.4 8Z"/>
+                  <path d="M6.4 10.5 12 13.2l5.6-2.7v4.3c0 1.7-2.5 2.9-5.6 2.9s-5.6-1.2-5.6-2.9Z"/>
+                  <g class="tassel">
+                    <path d="M21.4 8v6.1"/>
+                    <circle cx="21.4" cy="15.5" r="1.15" fill="currentColor" stroke="none"/>
+                  </g>
+                </svg>
+              </span>
+              <span class="fx-b">
+                <span class="mono t" data-fr="Formation">Education</span>
+                <span class="v" data-fr="Master en marketing stratégique &amp; communication">Master’s in Strategic Marketing &amp; Communication</span>
+              </span>
+            </li>
+            <li class="rv">
+              <span class="fx-i" aria-hidden="true">
+                <svg class="ico ico-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="8.8"/>
+                  <path d="M3.2 12h17.6"/>
+                  <path class="gl-m" d="M12 3.2c2.4 2.5 3.7 5.6 3.7 8.8s-1.3 6.3-3.7 8.8c-2.4-2.5-3.7-5.6-3.7-8.8S9.6 5.7 12 3.2Z"/>
+                </svg>
+              </span>
+              <span class="fx-b">
+                <span class="mono t" data-fr="Langues">Languages</span>
+                <span class="v" data-fr="Français, anglais, arabe">French, English, Arabic</span>
+              </span>
+            </li>
+            <li class="rv">
+              <span class="fx-i" aria-hidden="true">
+                <svg class="ico ico-aim" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle class="am-o" cx="12" cy="12" r="8.6"/>
+                  <circle class="am-i" cx="12" cy="12" r="4.6"/>
+                  <circle class="am-d" cx="12" cy="12" r="1.35" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="fx-b">
+                <span class="mono t" data-fr="Terrain">Focus</span>
+                <span class="v" data-fr="Analyse de marché, coordination, IA">Market analysis, coordination, AI</span>
+              </span>
+            </li>
+            <li class="rv">
+              <span class="fx-i" aria-hidden="true">
+                <svg class="ico ico-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse class="pin-sh" cx="12" cy="20.4" rx="4.4" ry="1.3" stroke="none" fill="currentColor"/>
+                  <g class="pin-b">
+                    <path d="M12 2.6c3.4 0 6.1 2.7 6.1 6.1 0 4.3-6.1 10-6.1 10S5.9 13 5.9 8.7c0-3.4 2.7-6.1 6.1-6.1z"/>
+                    <circle cx="12" cy="8.7" r="2.3"/>
+                  </g>
+                </svg>
+              </span>
+              <span class="fx-b">
+                <span class="mono t" data-fr="Basé à">Based in</span>
+                <span class="v" data-fr="Casablanca, Maroc">Casablanca, Morocco</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pb-col strengths" id="strengths">
+          <p class="mono mt-lab" data-fr="Points forts">Strengths</p>
+
+          <ol class="mt-list">
+            <li class="mt-i">
+              <span class="mono mt-n">01</span>
+              <span class="mt-b">
+                <h3 data-fr="Je suis audacieux">I am audacious</h3>
+                <p data-fr="Je tranche, et je dis tôt ce qui dérange plutôt qu’après coup.">I make the call, and say the uncomfortable thing early rather than after.</p>
+              </span>
+              <span class="mono mt-out" data-fr="Audace">Drive</span>
+            </li>
+            <li class="mt-i">
+              <span class="mono mt-n">02</span>
+              <span class="mt-b">
+                <h3 data-fr="Je prends l’initiative">I take initiative</h3>
+                <p data-fr="Je lance le travail que personne n’a demandé, et je le rends terminé.">I start the work nobody assigned, and bring it back finished.</p>
+              </span>
+              <span class="mono mt-out" data-fr="Autonomie">Autonomy</span>
+            </li>
+            <li class="mt-i">
+              <span class="mono mt-n">03</span>
+              <span class="mt-b">
+                <h3 data-fr="J’ai l’œil">I have an eye</h3>
+                <p data-fr="Je repère le détail qui fait qu’une chose paraît soignée, et je le corrige.">I notice the detail that makes a thing look considered, and I fix it.</p>
+              </span>
+              <span class="mono mt-out" data-fr="Exigence">Craft</span>
+            </li>
+            <li class="mt-i">
+              <span class="mono mt-n">04</span>
+              <span class="mt-b">
+                <h3 data-fr="J’apprends vite">I learn fast</h3>
+                <p data-fr="Je m’approprie un outil ou un marché neuf, et j’y suis utile en quelques jours.">I pick up a new tool or market, and I am useful in it within days.</p>
+              </span>
+              <span class="mono mt-out" data-fr="Curiosité">Curiosity</span>
+            </li>
+          </ol>
+
+          <!-- Drawn down by scroll, so the four read as one run rather than as
+               four cards that happen to be stacked. -->
+          <i class="mt-spine" aria-hidden="true"><i></i></i>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!--  02 journey 
+       Work and study on one line through time, oldest first. It is a plain
+       vertical timeline and it scrolls at page speed: the pinned horizontal
+       rail this replaced held the viewport for one and a half screens, which
+       is the whole of what "the scroll is slow" meant. -->
+  <section class="sec journey" id="journey">
+    <div class="shell sec-grid">
+      <div class="sec-head">
+        <h2 data-fr="Parcours">Journey</h2>
+        <i class="rule" aria-hidden="true"></i>
+        <p class="mono jr-note" data-fr="2018 à aujourd’hui">2018 to today</p>
+      </div>
+      <div class="sec-body">
+        <ol class="tl">
+          <span class="tl-line" aria-hidden="true"><i></i></span>
+
+          <li class="tl-i is-study">
+            <p class="mono tl-y">2020</p>
+            <div class="tl-c">
+              <span class="mono kind" data-fr="Formation">Education</span>
+              <h3 data-fr="Baccalauréat, sciences physiques">Baccalaureate, Physical Sciences</h3>
+              <p class="who">Lycée Maghreb Arabe, 2018 to 2020</p>
+            </div>
+          </li>
+
+          <li class="tl-i is-work" data-year="2023" tabindex="0">
+            <p class="mono tl-y"><span data-fr="Mai à Juin 2023">May to June 2023</span></p>
+            <div class="tl-c">
+              <div class="tl-top">
+                <span class="mono kind" data-fr="Expérience">Experience</span>
+                <span class="mark"><img class="lt" src="img/logo-intersig.png" alt="Intersig Maroc" loading="lazy"><img class="dk" src="img/logo-intersig-dark.png" alt="" aria-hidden="true" loading="lazy"></span>
+              </div>
+              <h3 data-fr="Stagiaire assistant comptable">Accounting Assistant Intern</h3>
+              <p class="who">Intersig Maroc S.A.R.L</p>
+              <span class="mono hint" data-fr="Survoler pour le détail">Hover for detail</span>
+              <div class="more">
+                <ul class="lines">
+                  <li data-fr="<b>Suivi opérationnel et reporting financier</b> dans un environnement corporate structuré."><b>Supported operational follow-up</b> and financial reporting within a structured corporate environment.</li>
+                  <li data-fr="<b>Organisation et suivi des informations financières</b>, préparation et gestion des documents de reporting."><b>Assisted with the organization and monitoring</b> of financial information and reporting documentation.</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-i is-study is-degree">
+            <p class="mono tl-y"><span data-fr="Juillet 2023">July 2023</span></p>
+            <div class="tl-c">
+              <div class="tl-top">
+                <span class="mono kind" data-fr="Diplôme">Degree</span>
+                <span class="seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.6" r="5.9"/><path class="rib" d="M8.9 13.6 7.2 21.2l4.8-2.6 4.8 2.6-1.7-7.6"/><path class="tick" d="M9.5 8.6 11.3 10.4 14.6 6.8"/></svg></span>
+              </div>
+              <h3 data-fr="Licence en Gestion">Bachelor in Management</h3>
+              <p class="who">FEG Settat, 2020 to 2023</p>
+            </div>
+          </li>
+
+          <li class="tl-i is-work" data-year="2025" tabindex="0">
+            <p class="mono tl-y"><span data-fr="Mars à Mai 2025">March to May 2025</span></p>
+            <div class="tl-c">
+              <div class="tl-top">
+                <span class="mono kind" data-fr="Expérience">Experience</span>
+                <span class="mark"><img class="lt" src="img/logo-fixi.png" alt="Fixi Market" loading="lazy"><img class="dk" src="img/logo-fixi-dark.png" alt="" aria-hidden="true" loading="lazy"></span>
+              </div>
+              <h3 data-fr="Stagiaire marketing">Marketing Intern</h3>
+              <p class="who">Fixi Market, <a href="https://fixi.ma" target="_blank" rel="noopener">fixi.ma</a></p>
+              <span class="mono hint" data-fr="Survoler pour le détail">Hover for detail</span>
+              <div class="more">
+                <ul class="lines">
+                  <li data-fr="<b>Analyses de marché et d’audience cible</b> pour alimenter le positionnement de la plateforme, la stratégie d’acquisition et les initiatives marketing."><b>Conducted market and target audience analysis</b> to inform platform positioning, acquisition strategy, and marketing initiatives.</li>
+                  <li data-fr="<b>Briefs stratégiques, documents de positionnement et présentations analytiques</b> transformant les insights de marché en recommandations concrètes."><b>Developed strategic briefs</b>, positioning documents, and analytical presentations to translate market insights into actionable recommendations.</li>
+                  <li data-fr="<b>Contribution au business plan</b> par l’analyse concurrentielle, l’évaluation des opportunités de marché et les prévisions de croissance."><b>Contributed to business plan development</b> through competitive analysis, market opportunity assessment, and growth forecasting.</li>
+                  <li data-fr="<b>Outils d’IA</b> utilisés pour accélérer la recherche et structurer l’information."><b>Used AI tools</b> to accelerate research and structure information.</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-i is-study is-degree">
+            <p class="mono tl-y"><span data-fr="Juillet 2025">July 2025</span></p>
+            <div class="tl-c">
+              <div class="tl-top">
+                <span class="mono kind" data-fr="Diplôme">Degree</span>
+                <span class="seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.6" r="5.9"/><path class="rib" d="M8.9 13.6 7.2 21.2l4.8-2.6 4.8 2.6-1.7-7.6"/><path class="tick" d="M9.5 8.6 11.3 10.4 14.6 6.8"/></svg></span>
+              </div>
+              <h3 data-fr="Master en marketing stratégique et communication">Master in Strategic Marketing and Communication</h3>
+              <p class="who">FSJES Aïn Sebaâ, 2023 to 2025</p>
+            </div>
+          </li>
+
+          <li class="tl-i is-work" data-year="2025" tabindex="0">
+            <p class="mono tl-y"><span data-fr="Juin 2025 à Juillet 2026">June 2025 to July 2026</span></p>
+            <div class="tl-c">
+              <div class="tl-top">
+                <span class="mono kind" data-fr="Expérience">Experience</span>
+                <span class="mark"><img class="lt" src="img/logo-fixi.png" alt="Fixi Market" loading="lazy"><img class="dk" src="img/logo-fixi-dark.png" alt="" aria-hidden="true" loading="lazy"></span>
+              </div>
+              <h3 data-fr="Chargé de marketing">Marketing Specialist</h3>
+              <p class="who">Fixi Market, <a href="https://fixi.ma" target="_blank" rel="noopener">fixi.ma</a></p>
+              <span class="mono hint" data-fr="Survoler pour le détail">Hover for detail</span>
+              <div class="more">
+                <ul class="lines">
+                  <li data-fr="<b>Conception des trois interfaces</b> de la plateforme : le site fixi.ma, l’application client où les automobilistes réservent une réparation, et Fixi Pro, l’espace des garages partenaires pour gérer leur garage virtuel et leurs prestations."><b>Designed the platform’s three interfaces</b>: the fixi.ma website, the customer app where drivers book a repair, and Fixi Pro, where partner garages run their virtual garage and list their services.</li>
+                  <li data-fr="<b>Conception du tunnel de réservation</b> de bout en bout, de la première recherche au rendez-vous confirmé."><b>Designed the reservation funnel</b> end to end, from the first search to a confirmed appointment.</li>
+                  <li data-fr="<b>Coordination transversale</b> entre les équipes Produit, Tech et Marketing afin d’aligner les livrables sur les objectifs business."><b>Coordinated cross-functional collaboration</b> between Product, Tech, and Marketing teams to align deliverables with business objectives.</li>
+                  <li data-fr="<b>Présentations clients</b> combinant analyses de marché, insights de performance et recommandations stratégiques."><b>Prepared client presentations</b> combining market analysis, performance insights, and strategic recommendations.</li>
+                  <li data-fr="<b>Traduction des orientations stratégiques</b> en plans d’action opérationnels, avec suivi jusqu’à la livraison finale."><b>Translated strategic objectives</b> into actionable operational plans, tracking progress through final delivery.</li>
+                  <li data-fr="<b>Priorités d’acquisition et indicateurs de performance</b> définis à partir d’analyses de marché."><b>Contributed to defining acquisition priorities</b> and performance metrics based on market insights.</li>
+                  <li data-fr="<b>Outils d’IA</b> mis à profit pour la recherche, l’analyse de données et l’optimisation des workflows."><b>Leveraged AI tools</b> to support research, data analysis, and workflow optimization.</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-i is-now">
+            <p class="mono tl-y">2026</p>
+            <div class="tl-c">
+              <span class="mono kind" data-fr="Aujourd’hui">Now</span>
+              <h3 data-fr="Ouvert aux opportunités">Open to opportunities</h3>
+              <p class="say" data-fr="Marketing, analyse et coordination, avec l’IA comme outil de travail quotidien. Le plus simple est un email, je réponds sous 24 heures.">Marketing, analysis and coordination, with AI as a daily working tool. Email is the fastest route, I reply within 24 hours.</p>
+              <a class="btn btn-solid tl-cta" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com" target="_blank" rel="noopener" data-fr="Me contacter">Get in touch</a>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 projects -->
+  <section class="sec" id="projects">
+    <div class="shell sec-grid">
+      <div class="sec-head">
+        <h2 data-fr="Projets académiques">Academic Projects</h2>
+        <i class="rule" aria-hidden="true"></i>
+      </div>
+      <div class="sec-body">
+        <ol class="cases">
+
+          <li class="case rv">
+            <span class="case-n" aria-hidden="true">01</span>
+            <div class="case-main">
+              <h3 data-fr="Repositionnement de marque et stratégie de lancement">Brand Repositioning &amp; Launch Strategy</h3>
+              <p class="who">Henry&#39;s, <span data-fr="Marque &amp; lancement">Brand &amp; launch</span></p>
+                <p class="case-p" data-fr="Analyse consommateur et marché pour construire un nouveau positionnement de marque : identité visuelle, packaging et stratégie de lancement intégrée online et offline.">Consumer and market analysis to develop a new brand positioning, including visual identity, packaging, and an integrated online and offline launch strategy.</p>
+            </div>
+          </li>
+
+          <li class="case rv">
+            <span class="case-n" aria-hidden="true">02</span>
+            <div class="case-main">
+              <h3 data-fr="Analyse stratégique de marché">Strategic Market Analysis</h3>
+              <p class="who">LG Electronics, <span data-fr="Analyse stratégique">Strategic analysis</span></p>
+                <p class="case-p" data-fr="Analyse concurrentielle et de marché approfondie via les Cinq Forces de Porter et une matrice SWOT, pour identifier les opportunités, évaluer la dynamique concurrentielle et formuler des recommandations de repositionnement.">In-depth competitive and market analysis using Porter&#39;s Five Forces and SWOT to identify market opportunities, assess competitive dynamics, and develop strategic repositioning recommendations.</p>
+            </div>
+          </li>
+
+          <li class="case rv">
+            <span class="case-n" aria-hidden="true">03</span>
+            <div class="case-main">
+              <h3 data-fr="Création d’une entreprise de construction de resorts de luxe">Luxury Resort Construction Company</h3>
+              <p class="who"><span data-fr="Projet de création d’entreprise">Business creation project</span>, <span data-fr="Structuration opérationnelle">Operational design</span></p>
+                <p class="case-p" data-fr="Structuration des SOPs, des processus opérationnels, des responsabilités et des livrables, avec un planning par étapes et un suivi des échéances pour garantir une exécution structurée.">Structured the SOPs, operational processes, responsibilities, and deliverables, with a staged plan and deadline tracking to keep execution disciplined.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!--  04 skills 
+       The rows run the full width of the screen, so the heading sits above them
+       rather than beside them. -->
+  <section class="sec sec-wide" id="skills">
+    <div class="shell">
+      <div class="wide-head">
+        <h2 data-fr="Compétences">Skills</h2>
+        <i class="rule" aria-hidden="true"></i>
+      </div>
+    </div>
+
+      <!-- Four columns, one per group, read top to bottom. It was two rows of
+           pills scrolling in opposite directions: you cannot read a moving list,
+           and the grouping only survived as one highlighted chip somewhere in
+           the stream. Nothing moves on its own here. -->
+      <div class="shell">
+        <ol class="skx">
+
+          <li class="skx-c rv" tabindex="0">
+            <span class="skx-n" aria-hidden="true">01</span>
+            <p class="skx-h"><span data-fr="Coordination &amp; exécution">Coordination &amp; Delivery</span></p>
+            <div class="skx-l">
+              <ul>
+                <li data-fr="Coordination et suivi de projets">Project coordination &amp; follow-up</li>
+                <li data-fr="Planification et organisation">Planning &amp; organization</li>
+                <li data-fr="Coordination des parties prenantes">Stakeholder coordination</li>
+                <li data-fr="Collaboration transversale">Cross-functional collaboration</li>
+                <li data-fr="Coordination administrative et opérationnelle">Administrative &amp; operational coordination</li>
+                <li data-fr="Orientation vers l’exécution">Execution focus</li>
+              </ul>
+            </div>
+            <span class="mono hint" data-fr="Survoler">Hover</span>
+          </li>
+
+          <li class="skx-c rv" tabindex="0">
+            <span class="skx-n" aria-hidden="true">02</span>
+            <p class="skx-h"><span data-fr="Analyse &amp; reporting">Analysis &amp; Reporting</span></p>
+            <div class="skx-l">
+              <ul>
+                <li data-fr="Analyse de marché et de données">Market &amp; data analysis</li>
+                <li data-fr="Reporting et suivi de la performance">Reporting &amp; performance tracking</li>
+                <li data-fr="Collecte de données et documentation">Data capturing &amp; documentation</li>
+                <li data-fr="Identification des problèmes et résolution">Issue identification &amp; problem solving</li>
+                <li data-fr="Amélioration des processus">Process improvement</li>
+                <li data-fr="Rigueur et attention aux détails">Attention to detail</li>
+              </ul>
+            </div>
+            <span class="mono hint" data-fr="Survoler">Hover</span>
+          </li>
+
+          <li class="skx-c rv" tabindex="0">
+            <span class="skx-n" aria-hidden="true">03</span>
+            <p class="skx-h"><span data-fr="Communication &amp; documents">Communication &amp; Documents</span></p>
+            <div class="skx-l">
+              <ul>
+                <li data-fr="Rédaction professionnelle et communication">Business writing &amp; communication</li>
+                <li data-fr="Élaboration de présentations">Presentation development</li>
+                <li data-fr="Présentations clients">Client presentations</li>
+                <li data-fr="Structuration de briefs">Brief structuring</li>
+                <li data-fr="Documents de positionnement">Positioning documents</li>
+                <li>Microsoft Office</li>
+              </ul>
+            </div>
+            <span class="mono hint" data-fr="Survoler">Hover</span>
+          </li>
+
+          <li class="skx-c rv" tabindex="0">
+            <span class="skx-n" aria-hidden="true">04</span>
+            <p class="skx-h"><span data-fr="IA &amp; automatisation">AI &amp; Automation</span></p>
+            <div class="skx-l">
+              <ul>
+                <li data-fr="Analyse et productivité assistées par l’IA">AI-assisted analysis &amp; productivity</li>
+                <li data-fr="Analyse de données assistée par l’IA">AI-assisted data analysis</li>
+                <li data-fr="Automatisation des workflows">Workflow automation</li>
+                <li data-fr="Structuration de l’information">Information structuring</li>
+                <li data-fr="Recherche assistée par l’IA">AI-assisted research</li>
+                <li data-fr="Conception de prompts">Prompt design</li>
+              </ul>
+            </div>
+            <span class="mono hint" data-fr="Survoler">Hover</span>
+          </li>
+
+        </ol>
+      </div>
+
+    <div class="shell">
+        <div class="langs rv">
+        <!-- A section title, not a caption. It was a 10px mono tag, which made
+             the five flags under it read as a footnote to Skills rather than as
+             a block of its own. -->
+        <div class="wide-head">
+          <h2 data-fr="Langues">Languages</h2>
+          <i class="rule" aria-hidden="true"></i>
+        </div>
+        <ul class="lang-grid">
+          <li class="lang" style="--l:1">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#012169"/><path d="M0 0 60 40M60 0 0 40" stroke="#fff" stroke-width="11"/><path d="M0 0 60 40M60 0 0 40" stroke="#C8102E" stroke-width="4.5"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="7"/></svg></span>
+            <span class="l" data-fr="Anglais">English</span>
+            <span class="mono lvl" data-fr="Bilingue">Bilingual</span>
+          <i class="lmeter" aria-hidden="true"><i></i></i>
+          </li>
+          <li class="lang" style="--l:1">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 60 40"><rect width="20" height="40" fill="#002395"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#ED2939"/></svg></span>
+            <span class="l" data-fr="Français">French</span>
+            <span class="mono lvl" data-fr="Bilingue">Bilingual</span>
+          <i class="lmeter" aria-hidden="true"><i></i></i>
+          </li>
+          <li class="lang" style="--l:.78">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#C1272D"/><path d="M30 9 36.5 28.9 19.5 16.6 40.5 16.6 23.5 28.9Z" fill="none" stroke="#006233" stroke-width="1.9" stroke-linejoin="round"/></svg></span>
+            <span class="l" data-fr="Arabe">Arabic</span>
+            <span class="mono lvl" data-fr="Maîtrise professionnelle complète">Full professional proficiency</span>
+          <i class="lmeter" aria-hidden="true"><i></i></i>
+          </li>
+          <li class="lang" style="--l:.3">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 60 40"><rect width="20" height="40" fill="#008C45"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#CD212A"/></svg></span>
+            <span class="l" data-fr="Italien">Italian</span>
+            <span class="mono lvl" data-fr="Notions">Basic</span>
+          <i class="lmeter" aria-hidden="true"><i></i></i>
+          </li>
+          <li class="lang" style="--l:.3">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/><g fill="#C8B100"><rect x="12.6" y="14.2" width="2.6" height="1.1"/><rect x="13.2" y="15.3" width="1.4" height="8.4"/><rect x="12.4" y="23.7" width="3" height="1.2"/><rect x="24.8" y="14.2" width="2.6" height="1.1"/><rect x="25.4" y="15.3" width="1.4" height="8.4"/><rect x="24.6" y="23.7" width="3" height="1.2"/><path d="M17.6 12.1c.7-1.5 4.1-1.5 4.8 0z"/><rect x="17.2" y="12.1" width="5.6" height="1.3"/><rect x="16.8" y="13.4" width="6.4" height="1"/></g><clipPath id="esArms"><path d="M16.6 14.4h6.8v6.1c0 2.6-1.6 3.9-3.4 4.8-1.8-.9-3.4-2.2-3.4-4.8z"/></clipPath><g clip-path="url(#esArms)"><rect x="16.6" y="14.4" width="3.4" height="5.3" fill="#AD1519"/><rect x="20" y="14.4" width="3.4" height="5.3" fill="#fff"/><rect x="16.6" y="19.7" width="3.4" height="5.7" fill="#FCDD09"/><rect x="17.4" y="19.7" width=".55" height="5.7" fill="#DA121A"/><rect x="18.6" y="19.7" width=".55" height="5.7" fill="#DA121A"/><rect x="20" y="19.7" width="3.4" height="5.7" fill="#AD1519"/></g><path d="M16.6 14.4h6.8v6.1c0 2.6-1.6 3.9-3.4 4.8-1.8-.9-3.4-2.2-3.4-4.8z" fill="none" stroke="#C8B100" stroke-width=".6"/><circle cx="20" cy="21.1" r="1.55" fill="#0039A6" stroke="#C8B100" stroke-width=".45"/></svg></span>
+            <span class="l" data-fr="Espagnol">Spanish</span>
+            <span class="mono lvl" data-fr="Notions">Basic</span>
+          <i class="lmeter" aria-hidden="true"><i></i></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!--  the tool ticker
+          Full bleed, so it sits outside the .shell that wraps the rest of this
+          section. Two identical lists in one track, the second aria-hidden: the
+          loop is a translate of exactly -50%, which lands the copy where the
+          original started, so the seam never arrives. One list would snap back.
+
+          EVERY NAME HERE HAS TO BE TRUE. It is a CV, and the failure mode is an
+          interviewer asking about the third item. Names are not translated, the
+          same rule the site already applies to the engagement names.
+
+          THEY ARE ALSO ALL MARKETER'S TOOLS. A first list shipped with
+          Cloudflare Pages, D1, Workers, Wrangler and GSAP in it, which are the
+          stack this site happens to run on and not the work he is hired for.
+          Mehdi cut them on sight, 2026-08-21: a marketing CV reading as a
+          developer's is a positioning mistake, not a long list. Nothing goes in
+          here because it is impressive to a different audience. -->
+    <!--  the tool grid
+          Was an auto-scrolling marquee until 2026-08-21. Mehdi replaced it with
+          a still grid from a reference he sent: a row that moves cannot be read
+          at a glance, and a list of tools is something you scan rather than
+          watch. The marquee's whole apparatus went with it, the doubled list,
+          the -50% loop, the edge mask and the hover-to-pause.
+
+          One tile per tool, mark and name, and the grid flows on its own with
+          auto-fit rather than a fixed column count, so nothing has to be
+          re-balanced when a tool is added or removed. -->
+    <div class="tk">
+      <div class="shell">
+        <!-- A section title, not a caption, the same correction the Languages
+             block already carries: as a 10px mono tag it made fourteen tiles
+             read as a footnote to Skills rather than as a block of their own. -->
+        <div class="wide-head">
+          <h2 data-fr="Outils">Tools</h2>
+          <i class="rule" aria-hidden="true"></i>
+        </div>
+        <ul class="tk-g">
+          <li data-g="illustrator"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="#300" d="M22.7 1.6h82.7c12.5 0 22.7 10.1 22.7 22.7v79.5c0 12.5-10.1 22.7-22.7 22.7H22.7C10.1 126.4 0 116.3 0 103.7V24.3C0 11.7 10.1 1.6 22.7 1.6"/><path fill="#ff9a00" d="M61.9 76.3H42l-4 12.5c-.1.5-.5.8-1 .7H27c-.6 0-.7-.3-.6-1l17.2-49.4c.2-.5.3-1.1.5-1.8c.2-1.1.3-2.3.3-3.5c-.1-.3.2-.5.4-.6h13.8c.4 0 .6.2.7.4l19.5 54.9c.2.6 0 .9-.5.9H67.1c-.4.1-.7-.2-.9-.6zM45.1 65.4h13.5c-.3-1.1-.7-2.5-1.2-3.8c-.5-1.4-1-3-1.4-4.6c-.5-1.7-1-3.3-1.5-4.9c-.5-1.7-1-3.2-1.4-4.7q-.6-2.25-1.2-4.2h-.1q-.75 3.45-1.8 6.9c-.8 2.6-1.6 5.2-2.5 7.9c-.8 2.7-1.6 5.2-2.4 7.4m45.6-22.7c-1.8.1-3.5-.6-4.7-1.9s-1.9-3.1-1.8-4.9c-.1-1.8.6-3.5 1.9-4.7s3-1.9 4.7-1.9c2.1 0 3.7.6 4.9 1.9s1.8 3 1.8 4.7c.1 1.8-.6 3.6-1.9 4.9s-3.1 2-4.9 1.9m-6 46.3V47.9c0-.5.2-.7.7-.7H96c.5 0 .7.3.7.7V89c0 .6-.2.9-.7.9H85.5c-.5-.1-.8-.4-.8-.9"/></svg></span><span class="tk-n">Adobe Illustrator</span></li>
+          <li data-g="canva"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><g fill="#00c4cc"><path d="M59.39.152c-.484.051-1.995.23-3.328.387c-5.374.613-11.468 2.227-16.816 4.48C19.891 13.106 5.324 30.849 1.305 51.2C.359 56.04.129 58.418.129 64c0 7.195.715 12.16 2.61 18.434c6.195 20.53 22.323 36.632 42.906 42.851c6.195 1.871 11.187 2.586 18.355 2.586c7.195 0 12.16-.715 18.434-2.61c20.53-6.195 36.632-22.323 42.851-42.906c1.871-6.195 2.586-11.187 2.586-18.355c0-3.047-.152-6.527-.332-7.809c-2.074-14.796-8.168-27.238-18.328-37.402C99.07 8.703 86.68 2.586 72.19.512c-1.996-.282-11.238-.54-12.8-.36m-20.863 40.32c1.36.41 1.996.794 2.918 1.715c1.793 1.82 2.203 2.817 2.203 5.555c0 2.051-.078 2.434-.691 3.508c-1.18 1.996-3.918 3.84-5.812 3.89c-1.333.028-1.278-.562.18-2.097c1.945-2.023 2.226-2.79 2.226-5.813c-.024-2.917-.383-3.914-1.739-4.734c-1.128-.691-2.355-.64-4.148.203c-4.66 2.23-9.703 9.653-11.672 17.258c-2.613 10.137 2.02 18.25 9.649 16.867c2.226-.41 6.425-2.558 8.246-4.25c1.508-1.379 1.508-1.406 1.66-3.12c.336-3.587 2.867-7.169 6.25-8.833c1.558-.77 1.945-.844 4.043-.844c1.996 0 2.457.102 3.43.637c3.097 1.77 2.457 5.89-.895 5.89c-1.945 0-2.945-1-1.535-1.534c1.383-.512.867-2.434-.742-2.868c-1.895-.488-4.047.793-5.403 3.25c-1.64 2.97-1.715 6.504-.156 8.114c1.512 1.613 3.406.336 4.867-3.329c.766-1.867 1.867-2.867 3.149-2.867c1.125 0 1.332.692.843 2.793c-.718 3.25-.23 4.094 1.793 3.098c.664-.309 1.766-1.023 2.43-1.535l1.254-1l.848-4.43c.922-4.965 1.277-5.633 3.172-5.988c1.82-.336 2.23.562 1.562 3.402l-.36 1.59l1.333-1.36c3.148-3.226 7.015-4.812 8.347-3.48c.715.715.637 1.613-.386 4.785c-.485 1.512-1.153 3.895-1.457 5.25c-.461 2.047-.489 2.535-.23 2.868c.82.972 3.327-.028 5.554-2.204l1.305-1.277l.156-2.844c.152-3.277.457-4.453 1.328-5.504c.82-.972 2.305-1.687 3.098-1.484c.793.207.793.973.078 3.227c-1 3.097-.895 10.238.129 10.238c.41 0 2.507-2.2 3.84-4.043l.996-1.36l-.793-.816c-1.383-1.46-1.715-2.406-1.715-4.789c0-1.738.129-2.379.562-3.227c.719-1.328 1.844-2.3 3.176-2.687c1.406-.434 3.148.281 3.863 1.562c.719 1.305.54 4.223-.383 6.223l-.664 1.457h.895c1.23 0 1.715-.305 3.918-2.379c1.152-1.101 2.484-2.05 3.48-2.511c3.918-1.84 8.528-.895 9.293 1.921c.64 2.254-.765 3.84-3.226 3.66c-1.766-.128-2.098-.59-1.074-1.456c1.843-1.54 0-3.508-2.637-2.793c-1.434.386-3.047 1.996-3.89 3.867c-1.692 3.738-.794 8.14 1.636 8.14c.973 0 2.691-1.921 3.355-3.789c.793-2.152 2.457-3.507 3.711-3.02c.692.255.743.946.309 3.122c-.488 2.383-.563 4.61-.18 5.633c.153.382.614 1.101 1.051 1.586c.816.921.844 1.254.152 1.691c-.332.23-.77.129-1.843-.46c-1.485-.77-2.766-2.153-3.227-3.458l-.281-.766l-1.024.766c-.59.41-1.511.871-2.047 1.023c-2.125.563-4.738-.894-5.964-3.351c-.489-.95-.641-3.738-.282-4.813c.204-.59.204-.59-.617-.18c-.433.231-1.355.485-2.07.563c-1.18.13-1.36.258-2.535 1.742c-1.664 2.07-4.61 4.864-5.813 5.454c-2.558 1.277-3.402.918-4.07-1.72l-.461-1.765l-1.102.973c-1.406 1.23-4.222 2.715-5.836 3.074c-1.535.332-3.175-.156-3.84-1.18c-.995-1.535-.663-4.785.922-9.164c1.176-3.25.333-3.3-2.636-.203c-2.203 2.328-3.149 3.992-3.762 6.578c-.64 2.688-1.41 3.66-3.148 4.07c-1.051.231-1.54-.41-1.332-1.816l.152-1.129l-.973.668c-1.383.946-3.125 1.817-4.328 2.149s-2.789-.024-3.172-.692c-.691-1.175-.691-1.175-1.765-.332c-2.332 1.895-5.66 1.356-7.348-1.152l-.54-.793l-1.687 1.562c-4.867 4.454-10.957 6.45-15.464 5.067c-5.735-1.738-8.907-6.656-8.856-13.746c.024-7.117 3.172-14.617 8.473-20.172c2.996-3.125 5.812-4.969 8.68-5.66c2.07-.512 3.328-.485 5.296.129zm0 0"/><path d="M90.418 58.676c-.563.562-.356 2.816.36 4.25c.359.742.742 1.332.87 1.332c.102 0 .332-.59.512-1.309c.64-2.66-.512-5.504-1.742-4.273m0 0"/></g></svg></span><span class="tk-n">Canva</span></li>
+          <li data-g="higgsfield"><span class="tk-i" style="color:#D1FE17" aria-hidden="true"><svg class="hf-logo__glyph" viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.3498 9.83713L18.3339 9.65759C18.1831 7.93447 17.0963 4.69261 14.0816 4.69261C11.8445 4.69261 10.1545 6.97097 8.66311 8.97967C7.47302 10.5883 6.4419 11.9683 5.3073 11.9683C5.00574 11.9357 4.61708 11.7805 4.3792 11.4294C4.16497 11.1108 4.10948 10.7026 4.22046 10.2126C4.39489 9.43684 5.39463 8.7182 6.44963 7.95063C7.02864 7.54238 7.6238 7.10955 8.03634 6.69311C9.22643 5.5091 9.82932 4.65164 9.82932 3.2717C9.82932 1.89176 9.09157 1.20565 8.47276 0.911636C7.23514 0.323844 5.41851 0.666781 4.26026 1.69583C4.08583 1.85922 3.91117 2.01418 3.75243 2.16119C2.58622 3.23097 1.80094 3.95781 0 3.40232V5.63972C2.38791 6.72588 4.39512 4.65164 5.15675 3.69633C5.74372 3.06758 6.36253 2.70006 6.82283 2.70006H6.84671C7.05298 2.70825 7.22741 2.78995 7.35454 2.93696C7.56081 3.18204 7.64018 3.46786 7.60038 3.78622C7.51305 4.45594 6.83875 5.23967 5.60113 6.09713C4.14928 7.10159 1.7218 8.78374 1.53122 10.8987C1.3884 12.4177 2.15003 13.9365 3.34012 14.5243C6.11669 15.8798 7.80665 13.5444 9.5994 11.0783C10.9719 9.1756 12.273 7.37103 14.0818 7.37103C15.7081 7.37103 16.311 8.75916 16.311 9.63301V9.80459L16.1523 9.83713C12.2095 10.5558 10.0595 14.3611 10.0595 16.1167C10.0595 17.8724 11.5034 19.375 13.2804 19.375C15.359 19.375 17.9293 17.5458 18.3419 12.4013L18.3578 12.2136H20V9.83737H18.3498V9.83713ZM16.1998 12.4746C15.8826 15.5531 14.3513 16.9904 13.4232 16.9904C13.0027 16.9904 12.4158 16.631 12.4158 15.9615C12.4158 15.2104 13.5026 12.932 15.946 12.2543L16.2316 12.1808L16.1998 12.4748V12.4746Z" fill="currentColor"></path></svg></span><span class="tk-n">Higgsfield</span></li>
+          <li data-g="powerpoint"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="file-type-powerpointa-SVGNTQfxeQw" x1="4.494" x2="13.832" y1="-1748.086" y2="-1731.914" gradientTransform="translate(0 1756)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ca4c28"/><stop offset=".5" stop-color="#c5401e"/><stop offset="1" stop-color="#b62f14"/></linearGradient></defs><path fill="#ed6c47" d="M18.93 17.3L16.977 3h-.146A12.9 12.9 0 0 0 3.953 15.854V16Z"/><path fill="#ff8f6b" d="M17.123 3h-.146v13l6.511 2.6L30 16v-.146A12.9 12.9 0 0 0 17.123 3"/><path fill="#d35230" d="M30 16v.143A12.905 12.905 0 0 1 17.12 29h-.287a12.907 12.907 0 0 1-12.88-12.857V16Z"/><path d="M17.628 9.389V23.26a1.2 1.2 0 0 1-.742 1.1a1.2 1.2 0 0 1-.45.091H7.027a10 10 0 0 1-.521-.65a12.74 12.74 0 0 1-2.553-7.657v-.286A12.7 12.7 0 0 1 6.05 8.85a9 9 0 0 1 .456-.65h9.93a1.2 1.2 0 0 1 1.192 1.189" opacity=".1"/><path d="M16.977 10.04v13.871a1.2 1.2 0 0 1-.091.448a1.2 1.2 0 0 1-1.1.741H7.62q-.309-.314-.593-.65a10 10 0 0 1-.521-.65a12.74 12.74 0 0 1-2.553-7.657v-.286A12.7 12.7 0 0 1 6.05 8.85h9.735a1.2 1.2 0 0 1 1.192 1.19" opacity=".2"/><path d="M16.977 10.04v12.571a1.2 1.2 0 0 1-1.192 1.189H6.506a12.74 12.74 0 0 1-2.553-7.657v-.286A12.7 12.7 0 0 1 6.05 8.85h9.735a1.2 1.2 0 0 1 1.192 1.19" opacity=".2"/><path d="M16.326 10.04v12.571a1.2 1.2 0 0 1-1.192 1.189H6.506a12.74 12.74 0 0 1-2.553-7.657v-.286A12.7 12.7 0 0 1 6.05 8.85h9.084a1.2 1.2 0 0 1 1.192 1.19" opacity=".2"/><path fill="url(#file-type-powerpointa-SVGNTQfxeQw)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="M9.293 12.028a3.3 3.3 0 0 1 2.174.636a2.27 2.27 0 0 1 .756 1.841a2.56 2.56 0 0 1-.373 1.376a2.5 2.5 0 0 1-1.059.935a3.6 3.6 0 0 1-1.591.334H7.687v2.8H6.141v-7.922ZM7.686 15.94h1.331a1.74 1.74 0 0 0 1.177-.351a1.3 1.3 0 0 0 .4-1.025q0-1.309-1.525-1.31H7.686z"/></svg></span><span class="tk-n">PowerPoint</span></li>
+          <li data-g="excel"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="file-type-excela-SVGSuUii0pt" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#18884f"/><stop offset=".5" stop-color="#117e43"/><stop offset="1" stop-color="#0b6631"/></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z"/><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z"/><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z"/><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1"/><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path fill="url(#file-type-excela-SVGSuUii0pt)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z"/><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3"/><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z"/></svg></span><span class="tk-n">Excel</span></li>
+          <li data-g="word"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="file-type-worda-SVG2m3AVb6p" x1="4.494" x2="13.832" y1="-1712.086" y2="-1695.914" gradientTransform="translate(0 1720)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2368c4"/><stop offset=".5" stop-color="#1a5dbe"/><stop offset="1" stop-color="#1146ac"/></linearGradient></defs><path fill="#41a5ee" d="M28.806 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5l11.069 3.25L30 9.5V4.191A1.19 1.19 0 0 0 28.806 3"/><path fill="#2b7cd3" d="M30 9.5H8.512V16l11.069 1.95L30 16Z"/><path fill="#185abd" d="M8.512 16v6.5l10.418 1.3L30 22.5V16Z"/><path fill="#103f91" d="M9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5H8.512v5.309A1.19 1.19 0 0 0 9.705 29"/><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1"/><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2"/><path fill="url(#file-type-worda-SVG2m3AVb6p)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"/><path fill="#fff" d="M6.9 17.988q.035.276.046.481h.028q.015-.195.065-.47c.05-.275.062-.338.089-.465l1.255-5.407h1.624l1.3 5.326a8 8 0 0 1 .162 1h.022a8 8 0 0 1 .135-.975l1.039-5.358h1.477l-1.824 7.748h-1.727l-1.237-5.126q-.054-.222-.122-.578t-.084-.52h-.021q-.021.189-.084.561t-.1.552L7.78 19.871H6.024L4.19 12.127h1.5l1.131 5.418a5 5 0 0 1 .079.443"/></svg></span><span class="tk-n">Word</span></li>
+          <li data-g="claude"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 256 257" xmlns="http://www.w3.org/2000/svg"><path fill="#d97757" d="m50.228 170.321l50.357-28.257l.843-2.463l-.843-1.361h-2.462l-8.426-.518l-28.775-.778l-24.952-1.037l-24.175-1.296l-6.092-1.297L0 125.796l.583-3.759l5.12-3.434l7.324.648l16.202 1.101l24.304 1.685l17.629 1.037l26.118 2.722h4.148l.583-1.685l-1.426-1.037l-1.101-1.037l-25.147-17.045l-27.22-18.017l-14.258-10.37l-7.713-5.25l-3.888-4.925l-1.685-10.758l7-7.713l9.397.649l2.398.648l9.527 7.323l20.35 15.75L94.817 91.9l3.889 3.24l1.555-1.102l.195-.777l-1.75-2.917l-14.453-26.118l-15.425-26.572l-6.87-11.018l-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0l10.63 1.426l4.472 3.888l6.61 15.101l10.694 23.786l16.591 32.34l4.861 9.592l2.592 8.879l.973 2.722h1.685v-1.556l1.36-18.211l2.528-22.36l2.463-28.776l.843-8.1l4.018-9.722l7.971-5.25l6.222 2.981l5.12 7.324l-.713 4.73l-3.046 19.768l-5.962 30.98l-3.889 20.739h2.268l2.593-2.593l10.499-13.934l17.628-22.036l7.778-8.749l9.073-9.657l5.833-4.601h11.018l8.1 12.055l-3.628 12.443l-11.342 14.388l-9.398 12.184l-13.48 18.147l-8.426 14.518l.778 1.166l2.01-.194l30.46-6.481l16.462-2.982l19.637-3.37l8.88 4.148l.971 4.213l-3.5 8.62l-20.998 5.184l-24.628 4.926l-36.682 8.685l-.454.324l.519.648l16.526 1.555l7.065.389h17.304l32.21 2.398l8.426 5.574l5.055 6.805l-.843 5.184l-12.962 6.611l-17.498-4.148l-40.83-9.721l-14-3.5h-1.944v1.167l11.666 11.406l21.387 19.314l26.767 24.887l1.36 6.157l-3.434 4.86l-3.63-.518l-23.526-17.693l-9.073-7.972l-20.545-17.304h-1.36v1.814l4.73 6.935l25.017 37.59l1.296 11.536l-1.814 3.76l-6.481 2.268l-7.13-1.297l-14.647-20.544l-15.1-23.138l-12.185-20.739l-1.49.843l-7.194 77.448l-3.37 3.953l-7.778 2.981l-6.48-4.925l-3.436-7.972l3.435-15.749l4.148-20.544l3.37-16.333l3.046-20.285l1.815-6.74l-.13-.454l-1.49.194l-15.295 20.999l-23.267 31.433l-18.406 19.702l-4.407 1.75l-7.648-3.954l.713-7.064l4.277-6.286l25.47-32.405l15.36-20.092l9.917-11.6l-.065-1.686h-.583L44.07 198.125l-12.055 1.555l-5.185-4.86l.648-7.972l2.463-2.593l20.35-13.999z"/></svg></span><span class="tk-n">Claude</span></li>
+          <li data-g="claudecode"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#D97757" d="M21 10.5h3v3h-3v3h-1.5v3H18v-3h-1.5v3H15v-3H9v3H7.5v-3H6v3H4.5v-3H3v-3H0v-3h3v-6h18Zm-15 0h1.5v-3H6Zm10.5 0H18v-3h-1.5z"/></svg></span><span class="tk-n">Claude Code</span></li>
+          <li data-g="chatgpt"><span class="tk-i" style="color:#FFFFFF" aria-hidden="true"><svg viewBox="0 0 256 260" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M239.184 106.203a64.72 64.72 0 0 0-5.576-53.103C219.452 28.459 191 15.784 163.213 21.74A65.586 65.586 0 0 0 52.096 45.22a64.72 64.72 0 0 0-43.23 31.36c-14.31 24.602-11.061 55.634 8.033 76.74a64.67 64.67 0 0 0 5.525 53.102c14.174 24.65 42.644 37.324 70.446 31.36a64.72 64.72 0 0 0 48.754 21.744c28.481.025 53.714-18.361 62.414-45.481a64.77 64.77 0 0 0 43.229-31.36c14.137-24.558 10.875-55.423-8.083-76.483m-97.56 136.338a48.4 48.4 0 0 1-31.105-11.255l1.535-.87l51.67-29.825a8.6 8.6 0 0 0 4.247-7.367v-72.85l21.845 12.636c.218.111.37.32.409.563v60.367c-.056 26.818-21.783 48.545-48.601 48.601M37.158 197.93a48.35 48.35 0 0 1-5.781-32.589l1.534.921l51.722 29.826a8.34 8.34 0 0 0 8.441 0l63.181-36.425v25.221a.87.87 0 0 1-.358.665l-52.335 30.184c-23.257 13.398-52.97 5.431-66.404-17.803M23.549 85.38a48.5 48.5 0 0 1 25.58-21.333v61.39a8.29 8.29 0 0 0 4.195 7.316l62.874 36.272l-21.845 12.636a.82.82 0 0 1-.767 0L41.353 151.53c-23.211-13.454-31.171-43.144-17.804-66.405zm179.466 41.695l-63.08-36.63L161.73 77.86a.82.82 0 0 1 .768 0l52.233 30.184a48.6 48.6 0 0 1-7.316 87.635v-61.391a8.54 8.54 0 0 0-4.4-7.213m21.742-32.69l-1.535-.922l-51.619-30.081a8.39 8.39 0 0 0-8.492 0L99.98 99.808V74.587a.72.72 0 0 1 .307-.665l52.233-30.133a48.652 48.652 0 0 1 72.236 50.391zM88.061 139.097l-21.845-12.585a.87.87 0 0 1-.41-.614V65.685a48.652 48.652 0 0 1 79.757-37.346l-1.535.87l-51.67 29.825a8.6 8.6 0 0 0-4.246 7.367zm11.868-25.58L128.067 97.3l28.188 16.218v32.434l-28.086 16.218l-28.188-16.218z"/></svg></span><span class="tk-n">ChatGPT</span></li>
+          <li data-g="n8n"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4B71" d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></svg></span><span class="tk-n">n8n</span></li>
+          <li data-g="semrush"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#FF642D" d="M20.698 11.911c0 .444-.226.516-.79.516-.596 0-.706-.1-.77-.554-.118-1.152-.896-2.13-2.201-2.24-.418-.034-.518-.19-.518-.706 0-.48.074-.708.446-.708 2.265.01 3.833 1.832 3.833 3.69v.002zm3.3 0c0-3.456-2.338-7.11-7.74-7.11H5.52c-.218 0-.354.11-.354.31 0 .109.082.209.156.26.388.31.97.654 1.73 1.036.743.372 1.323.616 1.903.852.246.1.336.208.336.344 0 .19-.136.308-.4.308H.372c-.254 0-.372.164-.372.326 0 .136.044.254.162.372.69.726 1.796 1.596 3.4 2.604 1.466.91 2.98 1.74 4.533 2.492.236.11.308.236.308.372-.008.154-.126.28-.4.28H4.1c-.216 0-.344.12-.344.3 0 .1.08.226.19.326.888.808 2.311 1.688 4.207 2.494 2.53 1.08 5.094 1.721 7.98 1.721 5.465 0 7.867-4.087 7.867-7.289l-.002.002zm-7.133 5.104c-2.794 0-5.132-2.276-5.132-5.114 0-2.794 2.33-5.04 5.132-5.04 2.863 0 5.111 2.24 5.111 5.04a5.086 5.086 0 0 1-5.111 5.114z"/></svg></span><span class="tk-n">Semrush</span></li>
+          <li data-g="meta"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 256 171" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="meta-icona-SVGYeLhubCc" x1="13.878%" x2="89.144%" y1="55.934%" y2="58.694%"><stop offset="0%" stop-color="#0064e1"/><stop offset="40%" stop-color="#0064e1"/><stop offset="83%" stop-color="#0073ee"/><stop offset="100%" stop-color="#0082fb"/></linearGradient><linearGradient id="meta-icona-SVGll66Sdsg" x1="54.315%" x2="54.315%" y1="82.782%" y2="39.307%"><stop offset="0%" stop-color="#0082fb"/><stop offset="100%" stop-color="#0064e0"/></linearGradient></defs><path fill="#0081fb" d="M27.651 112.136c0 9.775 2.146 17.28 4.95 21.82c3.677 5.947 9.16 8.466 14.751 8.466c7.211 0 13.808-1.79 26.52-19.372c10.185-14.092 22.186-33.874 30.26-46.275l13.675-21.01c9.499-14.591 20.493-30.811 33.1-41.806C161.196 4.985 172.298 0 183.47 0c18.758 0 36.625 10.87 50.3 31.257C248.735 53.584 256 81.707 256 110.729c0 17.253-3.4 29.93-9.187 39.946c-5.591 9.686-16.488 19.363-34.818 19.363v-27.616c15.695 0 19.612-14.422 19.612-30.927c0-23.52-5.484-49.623-17.564-68.273c-8.574-13.23-19.684-21.313-31.907-21.313c-13.22 0-23.859 9.97-35.815 27.75c-6.356 9.445-12.882 20.956-20.208 33.944l-8.066 14.289c-16.203 28.728-20.307 35.271-28.408 46.07c-14.2 18.91-26.324 26.076-42.287 26.076c-18.935 0-30.91-8.2-38.325-20.556C2.973 139.413 0 126.202 0 111.148z"/><path fill="url(#meta-icona-SVGYeLhubCc)" d="M21.802 33.206C34.48 13.666 52.774 0 73.757 0C85.91 0 97.99 3.597 110.605 13.897c13.798 11.261 28.505 29.805 46.853 60.368l6.58 10.967c15.881 26.459 24.917 40.07 30.205 46.49c6.802 8.243 11.565 10.7 17.752 10.7c15.695 0 19.612-14.422 19.612-30.927l24.393-.766c0 17.253-3.4 29.93-9.187 39.946c-5.591 9.686-16.488 19.363-34.818 19.363c-11.395 0-21.49-2.475-32.654-13.007c-8.582-8.083-18.615-22.443-26.334-35.352l-22.96-38.352C118.528 64.08 107.96 49.73 101.845 43.23c-6.578-6.988-15.036-15.428-28.532-15.428c-10.923 0-20.2 7.666-27.963 19.39z"/><path fill="url(#meta-icona-SVGll66Sdsg)" d="M73.312 27.802c-10.923 0-20.2 7.666-27.963 19.39c-10.976 16.568-17.698 41.245-17.698 64.944c0 9.775 2.146 17.28 4.95 21.82L9.027 149.482C2.973 139.413 0 126.202 0 111.148C0 83.772 7.514 55.24 21.802 33.206C34.48 13.666 52.774 0 73.757 0z"/></svg></span><span class="tk-n">Meta Business Suite</span></li>
+          <li data-g="analytics"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 256 284" xmlns="http://www.w3.org/2000/svg"><path fill="#f9ab00" d="M256.003 247.933a35.224 35.224 0 0 1-39.376 35.161c-18.044-2.67-31.266-18.371-30.826-36.606V36.845C185.365 18.591 198.62 2.881 216.687.24a35.22 35.22 0 0 1 39.316 35.16z"/><path fill="#e37400" d="M35.101 213.193c19.386 0 35.101 15.716 35.101 35.101c0 19.386-15.715 35.101-35.101 35.101S0 267.68 0 248.295s15.715-35.102 35.101-35.102m92.358-106.387c-19.477 1.068-34.59 17.406-34.137 36.908v94.285c0 25.588 11.259 41.122 27.755 44.433a35.16 35.16 0 0 0 42.146-34.56V142.089a35.22 35.22 0 0 0-35.764-35.282"/></svg></span><span class="tk-n">Google Analytics</span></li>
+          <li data-g="workspace"><span class="tk-i" aria-hidden="true"><svg viewBox="0 0 256 262" xmlns="http://www.w3.org/2000/svg"><path fill="#4285f4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622l38.755 30.023l2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"/><path fill="#34a853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055c-34.523 0-63.824-22.773-74.269-54.25l-1.531.13l-40.298 31.187l-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"/><path fill="#fbbc05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82c0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602z"/><path fill="#eb4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"/></svg></span><span class="tk-n">Google Workspace</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!--  05 contact 
+       Centred, against a left-aligned page: the change of axis is what says
+       this is the end rather than another section. -->
+  <section class="sec sec-end" id="contact">
+    <div class="shell end-in">
+
+      <!-- The ask on the left, the ways to reach him on the right. Centred, the
+           four details sat in a row under the buttons and read as a footer the
+           page had already finished with. -->
+      <div class="end-say">
+        <p class="mono end-lab" data-fr="Contact">Contact</p>
+
+        <p class="statement statement-c" data-fr="Ouvert aux opportunités.">Open to opportunities.</p>
+
+        <a class="mail rv" href="mailto:meehdikhalile@gmail.com">meehdikhalile@gmail.com</a>
+
+        <div class="cta-row rv">
+          <a class="btn btn-solid" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+             target="_blank" rel="noopener" data-fr="Me contacter">Get in touch</a>
+          <a class="btn" href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- Each row carries its own mark, and each mark says the thing its row
+           says: the handset rings, the badge assembles, the pin drops onto its
+           shadow, the clock sweeps one hour. They run on entry, and again on
+           hover for the two that are links. -->
+      <ul class="reach">
+        <li class="rv">
+          <span class="rc-i" aria-hidden="true">
+            <svg class="ico ico-li" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect class="li-box" x="3" y="3" width="18" height="18" rx="3.2"/>
+              <path class="li-i" d="M7.4 10.4v6.2"/>
+              <circle class="li-d" cx="7.4" cy="7.5" r="1.05" fill="currentColor" stroke="none"/>
+              <path class="li-n" d="M11.4 16.6v-6.2m0 2.1a2.6 2.6 0 0 1 5.2 0v4.1"/>
+            </svg>
+          </span>
+          <span class="rc-b">
+            <span class="mono t">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/" target="_blank" rel="noopener">in/mehdi-khalile</a>
+          </span>
+        </li>
+        <li class="rv">
+          <span class="rc-i" aria-hidden="true">
+            <svg class="ico ico-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse class="pin-sh" cx="12" cy="20.4" rx="4.4" ry="1.3" stroke="none" fill="currentColor"/>
+              <g class="pin-b">
+                <path d="M12 2.6c3.4 0 6.1 2.7 6.1 6.1 0 4.3-6.1 10-6.1 10S5.9 13 5.9 8.7c0-3.4 2.7-6.1 6.1-6.1z"/>
+                <circle cx="12" cy="8.7" r="2.3"/>
+              </g>
+            </svg>
+          </span>
+          <span class="rc-b">
+            <span class="mono t" data-fr="Localisation">Location</span>
+            <span data-fr="Casablanca, Maroc">Casablanca, Morocco</span>
+          </span>
+        </li>
+        <li class="rv">
+          <span class="rc-i" aria-hidden="true">
+            <svg class="ico ico-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8.8"/>
+              <path class="ck-m" d="M12 12V6.6"/>
+              <path class="ck-h" d="M12 12h3.7"/>
+            </svg>
+          </span>
+          <span class="rc-b">
+            <span class="mono t" data-fr="Réponse">Response</span>
+            <span data-fr="Sous 24 heures">Within 24 hours</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-in">
+    <span class="mono foot-c">© <span id="yr">2026</span> Mehdi Khalile</span>
+
+    <ul class="foot-soc">
+      <li>
+        <a class="soc" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com"
+           target="_blank" rel="noopener" aria-label="Email" data-fr-label="Email">
+          <svg class="ico ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.4"/>
+            <path class="flap" d="M2.6 7.1 12 13.3 21.4 7.1"/>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a class="soc" href="https://www.linkedin.com/in/mehdi-khalile-5863b9259/"
+           target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg class="ico ico-li" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect class="li-box" x="3" y="3" width="18" height="18" rx="3.2"/>
+            <path class="li-i" d="M7.4 10.4v6.2"/>
+            <circle class="li-d" cx="7.4" cy="7.5" r="1.05" fill="currentColor" stroke="none"/>
+            <path class="li-n" d="M11.4 16.6v-6.2m0 2.1a2.6 2.6 0 0 1 5.2 0v4.1"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Two arrows in a clipped box, not one that slides away and comes back:
+         the outgoing one leaves through the top as the next arrives from the
+         bottom, so the label never sits beside an empty square. -->
+    <a class="mono foot-top" href="#top">
+      <span class="ft-t" data-fr="Haut de page">Back to top</span>
+      <span class="ft-a" aria-hidden="true">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19.4V5.2M5.8 11.4 12 5.2l6.2 6.2"/>
+        </svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19.4V5.2M5.8 11.4 12 5.2l6.2 6.2"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+
+  <!-- The name, once, at the very bottom of the page, under everything else.
+       It fills with the accent as you arrive: outline while you are still
+       coming, solid once you are there. -->
+  <div class="signoff" aria-hidden="true">
+    <span class="so-l">Mehdi Khalile</span>
+    <span class="so-f"><span>Mehdi Khalile</span></span>
+  </div>
+</footer>
+
+<script src="lib/gsap.min.js"></script>
+<script src="lib/ScrollTrigger.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
