@@ -294,10 +294,23 @@
         dots[i].classList.toggle('is-on', i === at);
         dots[i].setAttribute('aria-current', i === at ? 'true' : 'false');
       }
-      size();
     }
 
+    /* THE RAIL IS RESIZED ONLY ONCE THE SCROLL HAS STOPPED, and this is the
+       whole reason this rail used to page worse than the skills deck on a
+       phone with identical CSS. The ten pieces differ by 143px in height, and
+       the rail followed the card being passed WHILE the finger was still
+       moving: the scroll container changed height mid-gesture, which is enough
+       to disturb the snapping, and the swipe ran on through several cards.
+       The four skills cards are all exactly 339px, so its rail never resized
+       and nothing ever disturbed it. That is the difference, not the input.
+
+       Dots still update during the scroll. They cost nothing and change no
+       layout. */
+    var still;
     function queue() {
+      clearTimeout(still);
+      still = setTimeout(size, 120);
       if (queued) return;
       queued = true;
       requestAnimationFrame(mark);
@@ -319,6 +332,12 @@
        never fire. */
     function size() {
       if (!opts.fit || at < 0 || !cards[at] || !live) return;
+      /* Parked on the card, not merely quiet for a moment. A debounce alone is
+         a guess about timing and it was measured missing: one resize still
+         landed in the middle of a three-card scroll. This cannot, because
+         mid-scroll the rail is by definition not at a snap offset. The timer
+         re-arms on every scroll event, so the last one always fires at rest. */
+      if (Math.abs(rail.scrollLeft - (cards[at].offsetLeft - cards[0].offsetLeft)) > 2) return;
       rail.style.height = cards[at].offsetHeight + 'px';
     }
 
@@ -350,85 +369,80 @@
       go(at + (e.deltaX > 0 ? 1 : -1));
     }, { passive: false });
 
-    /* ONE SWIPE MOVES ONE CARD, and the finger drives it rather than the
-       browser. `scroll-snap-stop: always` is set and is simply not honoured
-       everywhere on mobile, and where momentum outlives it a single swipe
-       crossed four cards or more, which is what Mehdi reported. The rail
-       carries `touch-action: pan-y`, so the browser keeps the vertical axis
-       and never scrolls this horizontally; the horizontal axis is moved here.
+    /* THE SWIPE IS THE BROWSER'S, and taking it over was a mistake worth
+       recording. A version of this drove the horizontal axis by hand under
+       `touch-action: pan-y`, to guarantee one card per swipe. It guaranteed it
+       and it felt awful: both rails needed two or three attempts before they
+       would move, and Mehdi's report was that they had got very bad.
 
-       The card still follows the finger, because a pager that only jumps when
-       you let go feels like a button rather than a surface. What it will not
-       do is carry on afterwards: the landing is always the card you started
-       on, plus or minus one. */
-    var tX = 0, tY = 0, tScroll = 0, tAt = 0, drag = null, settle;
-
-    rail.addEventListener('touchstart', function (e) {
-      if (!live || e.touches.length !== 1) return;
-      clearTimeout(settle);
-      tX = e.touches[0].clientX;
-      tY = e.touches[0].clientY;
-      tScroll = rail.scrollLeft;
-      tAt = at < 0 ? 0 : at;
-      drag = null;
-    }, { passive: true });
-
-    rail.addEventListener('touchmove', function (e) {
-      if (!live || e.touches.length !== 1) return;
-      var dx = e.touches[0].clientX - tX;
-      var dy = e.touches[0].clientY - tY;
-      /* The axis is decided once, on the first movement that is big enough to
-         mean anything. Deciding it per event lets a diagonal swipe flicker
-         between scrolling the page and dragging the rail. */
-      if (drag === null) {
-        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
-        drag = Math.abs(dx) > Math.abs(dy);
-        if (drag) rail.classList.add('is-drag');
-      }
-      if (!drag) return;
-      rail.scrollLeft = tScroll - dx;
-    }, { passive: true });
-
-    function land() {
-      if (!drag) return;
-      drag = null;
-      var moved = rail.scrollLeft - tScroll;
-      var step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
-      var far = Math.max(40, step * 0.12);
-      go(tAt + (moved > far ? 1 : moved < -far ? -1 : 0));
-      /* Snap comes back only once the landing has settled. Restored at
-         touchend it snaps to whatever is nearest first, which after a long
-         drag is several cards away, and the correction reads as a bounce. */
-      settle = setTimeout(function () { rail.classList.remove('is-drag'); }, 520);
-    }
-
-    rail.addEventListener('touchend', land, { passive: true });
-    rail.addEventListener('touchcancel', land, { passive: true });
-
+       Native scrolling with `scroll-snap-type: x mandatory` and
+       `scroll-snap-stop: always` is what the skills deck had when he called it
+       perfect, and it is what both use now. What actually made this rail behave
+       differently from that one is `size()` below, not the input handling. */
     rail.addEventListener('scroll', queue, { passive: true });
     addEventListener('resize', function () { queue(); size(); });
 
+    /* It advances on its own, and it stops the moment the reader takes over.
+
+       A card here is up to 150 words. Moving it while somebody is halfway
+       through is the whole risk of an automatic carousel, so this is written to
+       get out of the way rather than to keep running: any deliberate move, a
+       dot, a wheel, a swipe or a tab, ends it for the rest of the visit. A
+       reader who has taken control keeps it.
+
+       It also pauses under the pointer, and on a hidden tab, where advancing is
+       spent on nobody. Under reduced motion it never starts: a page that moves
+       by itself is the plainest case that setting exists for. */
+    var beat = null, done = false;
+
+    function halt() { if (beat) { clearInterval(beat); beat = null; } }
+
+    function run() {
+      halt();
+      if (!opts.auto || done || reduce || !live || document.hidden) return;
+      beat = setInterval(function () {
+        if (!live) return;
+        go(at + 1 >= cards.length ? 0 : at + 1);
+      }, opts.auto);
+    }
+
+    function seize() { done = true; halt(); }
+
+    rail.addEventListener('pointerenter', halt);
+    rail.addEventListener('pointerleave', run);
+    rail.addEventListener('focusin', halt);
+    rail.addEventListener('focusout', run);
+    rail.addEventListener('touchstart', seize, { passive: true });
+    rail.addEventListener('wheel', seize, { passive: true });
+    document.addEventListener('visibilitychange', run);
+
     dots.forEach(function (d, i) {
-      d.addEventListener('click', function () { go(i); });
+      d.addEventListener('click', function () { seize(); go(i); });
     });
 
     /* A card takes a tab stop, so tabbing to one has to page the rail to it.
        The browser still nudges the page a little to bring the focused card
        fully into view, which is its own behaviour and is left alone. */
     cards.forEach(function (c, i) {
-      if (c.tabIndex >= 0) c.addEventListener('focus', function () { go(i); });
+      if (c.tabIndex >= 0) c.addEventListener('focus', function () { seize(); go(i); });
     });
 
     mark();
+    size();
+    run();
 
     return {
-      refresh: function () { at = -1; mark(); },
+      refresh: function () { at = -1; mark(); size(); },
       /* The skills deck only pages on a phone, so its pager has to be able to
          stand down and give the height back rather than be rebuilt. */
       enable: function (on) {
         live = on;
-        if (on) { at = -1; mark(); }
-        else { rail.style.height = ''; dots.forEach(function (d) { d.classList.remove('is-on'); }); }
+        if (on) { at = -1; mark(); size(); run(); }
+        else {
+          halt();
+          rail.style.height = '';
+          dots.forEach(function (d) { d.classList.remove('is-on'); });
+        }
       }
     };
   }
@@ -437,7 +451,10 @@
     document.querySelector('.wr-strip'),
     document.querySelector('.wr-dots'),
     '.wr-c',
-    { fit: true }
+    /* Longer than the skills deck's, because a piece here is up to 150 words
+       and the deck's card is six short terms. It is still shorter than reading
+       one takes, which is what stopping on the first deliberate move is for. */
+    { fit: true, auto: 11000 }
   );
 
   /* The skills deck pages on a phone and nowhere else. Above 620px it is two
@@ -450,7 +467,7 @@
     document.querySelector('.skx'),
     document.querySelector('.skx-dots'),
     '.skx-c',
-    { fit: true }
+    { fit: true, auto: 6000 }
   );
   if (skPager) {
     var phone = matchMedia('(max-width:620px)');

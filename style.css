@@ -1068,23 +1068,12 @@ html[lang="fr"] .statement{max-width:33ch}
   gap:clamp(12px,1.4vw,20px);
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
-  /* The finger drives the paging, not the browser. scroll-snap-stop:always is
-     set and is simply not honoured on every mobile browser, and where momentum
-     survives it a single swipe crossed four cards or more. pan-y hands the
-     vertical axis to the page and leaves the horizontal one to app.js, which
-     moves exactly one card per swipe. */
-  touch-action:pan-y;
   /* The dots are the indicator, so the bar is not. It said the same thing
      worse and sat across the foot of a card somebody was reading. Both rules
      are needed: the standard property and the WebKit pseudo-element. */
   scrollbar-width:none;
 }
 .wr-strip::-webkit-scrollbar{display:none}
-/* Snap is off while a finger is down and stays off until the landing scroll has
-   settled. Re-enabled at touchend it snaps to whatever is nearest first, which
-   on a long drag is several cards away, and the correction back to one card
-   reads as a bounce. */
-.wr-strip.is-drag,.skx.is-drag{scroll-snap-type:none}
 .wr-c{
   flex:0 0 100%;width:100%;min-width:0;
   scroll-snap-align:start;scroll-snap-stop:always;
@@ -1346,7 +1335,6 @@ html[lang="fr"] .statement{max-width:33ch}
     scrollbar-width:none;
     grid-template-columns:none;
   }
-  .skx{touch-action:pan-y}
   .skx::-webkit-scrollbar{display:none}
   .skx .skx-c,.skx .skx-c:first-child{
     flex:0 0 100%;width:100%;min-width:0;
