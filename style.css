@@ -1081,10 +1081,6 @@ html[lang="fr"] .statement{max-width:33ch}
   scrollbar-width:none;
 }
 .wr-strip::-webkit-scrollbar{display:none}
-/* Snap is off only while a finger is down, and until the landing has finished.
-   The drag stays the browser's; this stops it choosing its own target on
-   release and fighting the one card app.js asked for. */
-.wr-strip.is-free,.skx.is-free{scroll-snap-type:none}
 .wr-c{
   flex:0 0 100%;width:100%;min-width:0;
   scroll-snap-align:start;scroll-snap-stop:always;
@@ -1118,12 +1114,10 @@ html[lang="fr"] .statement{max-width:33ch}
 .wr-t p{margin-top:11px;font-size:.94rem;line-height:1.62;color:var(--ink-2)}
 .wr-t p:first-child{margin-top:0}
 
-/* The strip is the height of the piece on screen, not of the longest one.
-   app.js sets it as the card changes; the transition is what stops the dots
-   jumping from one position to another. Without a script there is no inline
-   height and the strip falls back to the tallest card, which is correct and
-   simply less tidy. */
-.js .wr-strip{transition:height .38s var(--ease)}
+/* Nothing sets the rail's height any more. align-items:stretch on a flex row
+   makes every card the height of the tallest one for free, which is both what
+   Mehdi asked for and what stops the rail resizing under a finger. Script
+   measuring it was the thing that broke the paging. */
 
 /* Instagram's dots. A count and a position, which is what the scrollbar was
    doing badly, and the only control the section has. */
@@ -1339,7 +1333,7 @@ html[lang="fr"] .statement{max-width:33ch}
    nothing here reopens them. */
 @media (max-width:620px){
   .skx{
-    display:flex;align-items:flex-start;
+    display:flex;align-items:stretch;
     gap:clamp(12px,3vw,18px);
     overflow-x:auto;overflow-y:hidden;
     scroll-snap-type:x mandatory;
