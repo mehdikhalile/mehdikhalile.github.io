@@ -350,6 +350,61 @@
       go(at + (e.deltaX > 0 ? 1 : -1));
     }, { passive: false });
 
+    /* ONE SWIPE MOVES ONE CARD, and the finger drives it rather than the
+       browser. `scroll-snap-stop: always` is set and is simply not honoured
+       everywhere on mobile, and where momentum outlives it a single swipe
+       crossed four cards or more, which is what Mehdi reported. The rail
+       carries `touch-action: pan-y`, so the browser keeps the vertical axis
+       and never scrolls this horizontally; the horizontal axis is moved here.
+
+       The card still follows the finger, because a pager that only jumps when
+       you let go feels like a button rather than a surface. What it will not
+       do is carry on afterwards: the landing is always the card you started
+       on, plus or minus one. */
+    var tX = 0, tY = 0, tScroll = 0, tAt = 0, drag = null, settle;
+
+    rail.addEventListener('touchstart', function (e) {
+      if (!live || e.touches.length !== 1) return;
+      clearTimeout(settle);
+      tX = e.touches[0].clientX;
+      tY = e.touches[0].clientY;
+      tScroll = rail.scrollLeft;
+      tAt = at < 0 ? 0 : at;
+      drag = null;
+    }, { passive: true });
+
+    rail.addEventListener('touchmove', function (e) {
+      if (!live || e.touches.length !== 1) return;
+      var dx = e.touches[0].clientX - tX;
+      var dy = e.touches[0].clientY - tY;
+      /* The axis is decided once, on the first movement that is big enough to
+         mean anything. Deciding it per event lets a diagonal swipe flicker
+         between scrolling the page and dragging the rail. */
+      if (drag === null) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        drag = Math.abs(dx) > Math.abs(dy);
+        if (drag) rail.classList.add('is-drag');
+      }
+      if (!drag) return;
+      rail.scrollLeft = tScroll - dx;
+    }, { passive: true });
+
+    function land() {
+      if (!drag) return;
+      drag = null;
+      var moved = rail.scrollLeft - tScroll;
+      var step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
+      var far = Math.max(40, step * 0.12);
+      go(tAt + (moved > far ? 1 : moved < -far ? -1 : 0));
+      /* Snap comes back only once the landing has settled. Restored at
+         touchend it snaps to whatever is nearest first, which after a long
+         drag is several cards away, and the correction reads as a bounce. */
+      settle = setTimeout(function () { rail.classList.remove('is-drag'); }, 520);
+    }
+
+    rail.addEventListener('touchend', land, { passive: true });
+    rail.addEventListener('touchcancel', land, { passive: true });
+
     rail.addEventListener('scroll', queue, { passive: true });
     addEventListener('resize', function () { queue(); size(); });
 

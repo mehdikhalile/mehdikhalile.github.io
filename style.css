@@ -1068,12 +1068,23 @@ html[lang="fr"] .statement{max-width:33ch}
   gap:clamp(12px,1.4vw,20px);
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
+  /* The finger drives the paging, not the browser. scroll-snap-stop:always is
+     set and is simply not honoured on every mobile browser, and where momentum
+     survives it a single swipe crossed four cards or more. pan-y hands the
+     vertical axis to the page and leaves the horizontal one to app.js, which
+     moves exactly one card per swipe. */
+  touch-action:pan-y;
   /* The dots are the indicator, so the bar is not. It said the same thing
      worse and sat across the foot of a card somebody was reading. Both rules
      are needed: the standard property and the WebKit pseudo-element. */
   scrollbar-width:none;
 }
 .wr-strip::-webkit-scrollbar{display:none}
+/* Snap is off while a finger is down and stays off until the landing scroll has
+   settled. Re-enabled at touchend it snaps to whatever is nearest first, which
+   on a long drag is several cards away, and the correction back to one card
+   reads as a bounce. */
+.wr-strip.is-drag,.skx.is-drag{scroll-snap-type:none}
 .wr-c{
   flex:0 0 100%;width:100%;min-width:0;
   scroll-snap-align:start;scroll-snap-stop:always;
@@ -1241,29 +1252,43 @@ html[lang="fr"] .statement{max-width:33ch}
 .skx-c ul li:first-child{border-top:0;padding-top:14px}
 
 /*  open  */
-.skx-c:first-child,.skx-c:hover,.skx-c:focus-visible,.skx-c:focus-within{
-  flex-grow:2.5;border-color:var(--accent);box-shadow:var(--shadow);
-}
-/* Open, it stands down: six terms over a 137px outlined glyph is two things
-   competing for the same 500px. */
-.skx-c:first-child .skx-n,.skx-c:hover .skx-n,.skx-c:focus-within .skx-n{
-  opacity:0;transform:translateY(14px);
-}
-.skx-c:first-child .skx-h,.skx-c:hover .skx-h,.skx-c:focus-within .skx-h{color:var(--ink)}
-.skx-c:first-child .skx-l,.skx-c:hover .skx-l,.skx-c:focus-within .skx-l{grid-template-rows:1fr;opacity:1}
+/* THE WHOLE DECK MECHANISM IS FENCED INTO THE WIDTHS THAT HAVE A DECK, and
+   that fence is the fix for a real bug rather than tidying. The give-up rule
+   below is seven classes deep; every mobile reset was three or four, so it won
+   everywhere the query did not reach. On a phone the cards take a tab stop, so
+   TAPPING one made the deck :focus-within, and card 01, not being the tapped
+   one, collapsed to its numeral and heading with no terms under it. That is
+   exactly what Mehdi reported when paging back to 01.
 
-/* and the first one gives the open state up the moment the pointer or the
-   keyboard takes it. :focus-within on the deck as well as :hover, or tabbing to
-   a card opens a second one and two cards share the width. */
-.skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within){
-  flex-grow:1;border-color:var(--line);box-shadow:none;
-}
-.skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-n{
-  opacity:1;transform:none;
-}
-.skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-h{color:var(--ink-2)}
-.skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-l{
-  grid-template-rows:0fr;opacity:0;
+   Fencing it beats adding specificity: the two states are now mutually
+   exclusive with the block below, which is the same condition inverted, so
+   neither has to out-shout the other. The README's note that every reset here
+   must out-specify the open state no longer applies. */
+@media (hover:hover) and (pointer:fine) and (min-width:921px){
+  .skx-c:first-child,.skx-c:hover,.skx-c:focus-visible,.skx-c:focus-within{
+    flex-grow:2.5;border-color:var(--accent);box-shadow:var(--shadow);
+  }
+  /* Open, it stands down: six terms over a 137px outlined glyph is two things
+     competing for the same 500px. */
+  .skx-c:first-child .skx-n,.skx-c:hover .skx-n,.skx-c:focus-within .skx-n{
+    opacity:0;transform:translateY(14px);
+  }
+  .skx-c:first-child .skx-h,.skx-c:hover .skx-h,.skx-c:focus-within .skx-h{color:var(--ink)}
+  .skx-c:first-child .skx-l,.skx-c:hover .skx-l,.skx-c:focus-within .skx-l{grid-template-rows:1fr;opacity:1}
+
+  /* and the first one gives the open state up the moment the pointer or the
+     keyboard takes it. :focus-within on the deck as well as :hover, or tabbing
+     to a card opens a second one and two cards share the width. */
+  .skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within){
+    flex-grow:1;border-color:var(--line);box-shadow:none;
+  }
+  .skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-n{
+    opacity:1;transform:none;
+  }
+  .skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-h{color:var(--ink-2)}
+  .skx:is(:hover,:focus-within) .skx-c:first-child:not(:hover):not(:focus-within) .skx-l{
+    grid-template-rows:0fr;opacity:0;
+  }
 }
 
 /* No pointer, no deck. Hover is the whole mechanism, so where it does not exist
@@ -1321,6 +1346,7 @@ html[lang="fr"] .statement{max-width:33ch}
     scrollbar-width:none;
     grid-template-columns:none;
   }
+  .skx{touch-action:pan-y}
   .skx::-webkit-scrollbar{display:none}
   .skx .skx-c,.skx .skx-c:first-child{
     flex:0 0 100%;width:100%;min-width:0;
@@ -1462,6 +1488,13 @@ html[lang="fr"] .statement{max-width:33ch}
 .tk-n{
   font-family:var(--display);font-weight:500;font-size:clamp(.94rem,1.05vw,1.05rem);
   letter-spacing:-.015em;color:var(--ink-2);line-height:1.2;
+  /* The tile already centres the mark and the name as a pair, measured at 0px
+     off centre at every width. What was not centred is a name that wraps: the
+     block is as wide as its longest line and the short one sat against the
+     left of it, so "Adobe" hung off the left edge of "Illustrator" and the
+     tile read as lopsided. Four of the fourteen wrap at the width this is
+     usually seen at. */
+  text-align:center;
 }
 .tk-g li:hover .tk-n{color:var(--ink)}
 .tk-i{width:26px;height:26px;flex:none;display:grid;place-items:center}
