@@ -307,14 +307,13 @@
 
        Dots still update during the scroll. They cost nothing and change no
        layout. */
-    var still;
     function queue() {
-      clearTimeout(still);
-      still = setTimeout(size, 120);
       if (queued) return;
       queued = true;
       requestAnimationFrame(mark);
     }
+
+    var watch;
 
     function go(i) {
       /* Clamped, because the wheel and the arrow keys both ask for at ± 1 and
@@ -322,7 +321,32 @@
          scrollLeft rather than scrollIntoView, which walks up the ancestors and
          scrolls the page as well as the rail. */
       i = Math.max(0, Math.min(cards.length - 1, i));
-      rail.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+      var left = cards[i].offsetLeft - cards[0].offsetLeft;
+      rail.scrollTo({ left: left, behavior: 'smooth' });
+      park(left);
+    }
+
+    /* Snap comes back when the rail has ARRIVED, not after a fixed wait. A
+       450ms timer was measured cutting across a landing that was still
+       travelling: the rail was passing 500 on its way back from an 1035px
+       overshoot, mandatory snap woke up, grabbed the nearest card and left it
+       two along instead of one. The cap is a safety net, not the mechanism. */
+    function park(left) {
+      clearInterval(watch);
+      var tries = 0;
+      watch = setInterval(function () {
+        if (Math.abs(rail.scrollLeft - left) < 2 || ++tries > 60) {
+          clearInterval(watch);
+          rail.classList.remove('is-free');
+          return;
+        }
+        /* THE ASK IS REPEATED UNTIL THE FLING DIES. A single scrollTo at
+           touchend loses to the browser's own momentum: a fast 400px drag
+           carried on past the card we asked for and settled two along. The
+           fling cannot be cancelled, so it is simply out-waited, the target
+           re-asserted every fourth tick until the rail converges on it. */
+        if (tries % 4 === 0) rail.scrollTo({ left: left, behavior: 'smooth' });
+      }, 30);
     }
 
     /* The rail is the height of the card being shown, where the caller asks
@@ -330,15 +354,28 @@
        with no event of its own: applyLang rewrites the text, so a card's height
        changes without its box ever being resized and a ResizeObserver would
        never fire. */
+    /* EVERY CARD IS THE HEIGHT OF THE TALLEST, and that is the fix for the
+       paging as much as for the look of it. Mehdi 2026-08-24.
+
+       Following the card being shown meant the rail changed height as the
+       swipe passed each one, and a scroll container that resizes under the
+       finger has its snapping disturbed: that is why this rail slipped into
+       the card after the one you asked for while the skills deck, whose four
+       cards are all the same height, never did. One height for all ten and
+       there is nothing left to disturb.
+
+       Measured rather than declared, because it depends on the width and on
+       the language: French runs about a third longer. The cost is blank space
+       under the shorter pieces, which Mehdi chose over the alternative.
+
+       The rail must be released before measuring or every card reports the
+       height the rail is already pinned to, and it stays that size for ever. */
     function size() {
-      if (!opts.fit || at < 0 || !cards[at] || !live) return;
-      /* Parked on the card, not merely quiet for a moment. A debounce alone is
-         a guess about timing and it was measured missing: one resize still
-         landed in the middle of a three-card scroll. This cannot, because
-         mid-scroll the rail is by definition not at a snap offset. The timer
-         re-arms on every scroll event, so the last one always fires at rest. */
-      if (Math.abs(rail.scrollLeft - (cards[at].offsetLeft - cards[0].offsetLeft)) > 2) return;
-      rail.style.height = cards[at].offsetHeight + 'px';
+      if (!opts.fit || !live) return;
+      rail.style.height = '';
+      var tall = 0, i;
+      for (i = 0; i < cards.length; i++) tall = Math.max(tall, cards[i].offsetHeight);
+      if (tall) rail.style.height = tall + 'px';
     }
 
     /* ONE GESTURE MOVES ONE CARD, and this is why the wheel is taken over
@@ -369,16 +406,49 @@
       go(at + (e.deltaX > 0 ? 1 : -1));
     }, { passive: false });
 
-    /* THE SWIPE IS THE BROWSER'S, and taking it over was a mistake worth
-       recording. A version of this drove the horizontal axis by hand under
-       `touch-action: pan-y`, to guarantee one card per swipe. It guaranteed it
-       and it felt awful: both rails needed two or three attempts before they
-       would move, and Mehdi's report was that they had got very bad.
+    /* ONE SWIPE MOVES ONE CARD, NEVER TWO, and the drag itself is still the
+       browser's. That distinction is the whole lesson here.
 
-       Native scrolling with `scroll-snap-type: x mandatory` and
-       `scroll-snap-stop: always` is what the skills deck had when he called it
-       perfect, and it is what both use now. What actually made this rail behave
-       differently from that one is `size()` below, not the input handling. */
+       An earlier version drove the horizontal axis by hand under
+       `touch-action: pan-y`. It did guarantee one card and it felt awful:
+       both rails needed two or three attempts before they would move. What
+       made it stubborn was taking the DRAG, not fixing the landing.
+
+       So the finger scrolls the rail natively, with nothing intercepted and no
+       dead zone. Only where it comes to rest is ours: snap is switched off
+       while the finger is down so the browser does not pick its own target,
+       and on release the rail is sent to the card it started on plus or minus
+       one. `scroll-snap-stop: always` cannot do this on its own, because it
+       governs a fling and not a deliberate drag: a finger that physically
+       travels 900px across a 371px card has asked to move two and a half
+       cards, and the browser is right to give them. The rule that it should
+       still only move one is ours, so it has to be written here.
+
+       The threshold is 15% of a card, which is why a short flick still moves:
+       a page that needs a long swipe is the stubborn one again. */
+    var from = 0, fromScroll = 0, touching = false;
+
+    rail.addEventListener('touchstart', function () {
+      if (!live) return;
+      clearInterval(watch);
+      rail.classList.add('is-free');
+      from = at < 0 ? 0 : at;
+      fromScroll = rail.scrollLeft;
+      touching = true;
+    }, { passive: true });
+
+    function release() {
+      if (!live || !touching) return;
+      touching = false;
+      var step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
+      var moved = rail.scrollLeft - fromScroll;
+      var far = step * 0.15;
+      go(from + (moved > far ? 1 : moved < -far ? -1 : 0));
+    }
+
+    rail.addEventListener('touchend', release, { passive: true });
+    rail.addEventListener('touchcancel', release, { passive: true });
+
     rail.addEventListener('scroll', queue, { passive: true });
     addEventListener('resize', function () { queue(); size(); });
 

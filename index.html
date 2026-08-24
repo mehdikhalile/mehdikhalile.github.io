@@ -869,13 +869,26 @@
        Centred, against a left-aligned page: the change of axis is what says
        this is the end rather than another section. -->
   <section class="sec sec-end" id="contact">
+
+    <!-- The same head Tools and Languages carry, Mehdi 2026-08-24. It was a
+         10px mono label inside the left column, which made the last section of
+         the page the only one arriving without a title, and read as a caption
+         on the block rather than as the start of a section. It spans the shell
+         rather than the column, or the rule stops halfway across and states a
+         width nothing else on the page uses. -->
+    <div class="shell">
+      <div class="wide-head">
+        <h2 data-fr="Contact">Contact</h2>
+        <i class="rule" aria-hidden="true"></i>
+      </div>
+    </div>
+
     <div class="shell end-in">
 
       <!-- The ask on the left, the ways to reach him on the right. Centred, the
            four details sat in a row under the buttons and read as a footer the
            page had already finished with. -->
       <div class="end-say">
-        <p class="mono end-lab" data-fr="Contact">Contact</p>
 
         <!-- Same length as the line it replaced, which is why it is this
              wording and not a longer one: measured at 0px delta and the same

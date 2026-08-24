@@ -1057,9 +1057,16 @@ html[lang="fr"] .statement{max-width:33ch}
 .wr-wrap{margin-top:clamp(22px,2.6vw,34px)}
 .wr-strip{
   display:flex;
-  /* Each card is its own height. Stretched, every one was as tall as the
-     longest piece and the nine shorter ones ended in a panel of nothing. */
-  align-items:flex-start;
+  /* Every card is the height of the rail, and the rail is the height of the
+     longest piece. Mehdi 2026-08-24, choosing blank space under the shorter
+     ones over cards that changed size as he paged.
+
+     It is not only a matter of looks. Sized to their own content the rail had
+     to resize as each card arrived, and a scroll container that changes height
+     under the finger has its snapping disturbed: this rail slipped into the
+     card after the one you asked for, and the skills deck, whose four cards
+     are all one height, never did. */
+  align-items:stretch;
   /* Butted together the cards read as one long panel sliding past, because the
      only thing between two of them is a pair of hairlines meeting. The gap is
      what makes the next one arrive as a separate object. It does not disturb
@@ -1074,6 +1081,10 @@ html[lang="fr"] .statement{max-width:33ch}
   scrollbar-width:none;
 }
 .wr-strip::-webkit-scrollbar{display:none}
+/* Snap is off only while a finger is down, and until the landing has finished.
+   The drag stays the browser's; this stops it choosing its own target on
+   release and fighting the one card app.js asked for. */
+.wr-strip.is-free,.skx.is-free{scroll-snap-type:none}
 .wr-c{
   flex:0 0 100%;width:100%;min-width:0;
   scroll-snap-align:start;scroll-snap-stop:always;
@@ -1457,6 +1468,37 @@ html[lang="fr"] .statement{max-width:33ch}
     phone. */
 .tk{margin-top:clamp(60px,7vw,96px)}
 .tk .wide-head{margin-bottom:clamp(20px,2.6vw,30px)}
+
+/* The contact head costs 20px that the end of the page does not have. It and
+   the footer must fit one phone screen, and at 375x460 there were 7px spare
+   before this title existed, so the head has to pay for itself rather than the
+   block growing. Its own spacing gives the 20px back: the section already
+   carries the padding that separates it from Tools above, so a full gap under
+   the title as well is the same distance stated twice.
+
+   Desktop keeps the normal spacing. Every rule here is inside the query. */
+#contact .wide-head{margin-bottom:clamp(18px,2.4vw,28px)}
+
+/* The head costs 35px the end of the page did not have spare, so it pays for
+   itself out of soft spacing rather than the block being allowed to grow. The
+   section already carries the padding that separates it from Tools above, so a
+   full gap under the title as well states the same distance twice.
+
+   Written against #contact.sec-end and not .sec-end: the base rule sits later
+   in this file and a bare class loses to it wherever it is declared. */
+@media (max-width:760px){
+  #contact.sec-end{padding-top:10px}
+  #contact .wide-head{margin-bottom:8px}
+  #contact .end-in{padding-bottom:8px}
+}
+/* Shorter than an SE with its browser furniture, where the decoration has
+   already gone and spacing is the last thing left to give. */
+@media (max-width:760px) and (max-height:540px){
+  #contact.sec-end{padding-top:6px}
+  #contact .wide-head{margin-bottom:4px}
+  #contact .end-in{padding-bottom:4px}
+  #contact .wide-head h2{font-size:1.42rem}
+}
 .tk-g{
   list-style:none;margin:0;padding:0;display:grid;gap:clamp(10px,1.1vw,14px);
   grid-template-columns:repeat(auto-fit,minmax(178px,1fr));
@@ -1669,11 +1711,6 @@ html[lang="fr"] .statement{max-width:33ch}
 }
 .end-say{min-width:0}
 
-/* A flex row drops the whitespace between its children, so SECTION and 05 ran
-   together. The gap puts it back. */
-.end-lab{color:var(--ink-3);display:flex;align-items:center;gap:.5em}
-.end-lab .dot{margin:0 .3em}
-.end-lab .num-in{color:var(--accent)}
 .statement-c{max-width:18ch;margin-top:clamp(20px,2.6vw,30px)}
 
 .mail{
