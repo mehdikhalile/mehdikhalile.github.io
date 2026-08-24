@@ -255,30 +255,28 @@
     });
   }
 
-  /*  the writing strip
+  /*  the pager
 
-     One piece fills the column and the dots say where you are in the ten.
-     There is no open card and no closed one, so this only reports a position;
-     the previous version had to mark the centred card as different from its
-     neighbours and that marking was the thing that looked wrong while it
-     moved.
+     One card fills the rail and the dots say where you are. Used twice: by the
+     writing strip at every width, and by the skills deck on a phone only, so
+     the two behave identically and there is one implementation of it.
 
-     It runs under reduced motion too. Knowing which of ten you are looking at
-     is the section working, not an arrival effect. With no script at all the
-     strip is still a scroller and every piece is still readable, which is why
-     nothing here writes the text. */
-  (function strip() {
-    var rail = document.querySelector('.wr-strip');
-    var dotBox = document.querySelector('.wr-dots');
-    if (!rail || !dotBox) return;
-    var cards = [].slice.call(rail.querySelectorAll('.wr-c'));
-    var dots = [].slice.call(dotBox.querySelectorAll('.wr-dot'));
-    if (!cards.length || dots.length !== cards.length) return;
+     It runs under reduced motion too. Knowing which card you are on is the
+     section working, not an arrival effect. With no script the rail is still a
+     scroller and every card is still readable, which is why nothing here
+     writes content. */
+  function pager(rail, dotBox, sel, opts) {
+    if (!rail || !dotBox) return null;
+    var cards = [].slice.call(rail.querySelectorAll(sel));
+    var dots = [].slice.call(dotBox.children);
+    if (!cards.length || dots.length !== cards.length) return null;
+    opts = opts || {};
 
-    var at = -1, queued = false;
+    var at = -1, queued = false, live = true;
 
     function mark() {
       queued = false;
+      if (!live) return;
       /* Every rect in one pass, then the classes in a second. Interleaving is
          a forced reflow per card per frame and this runs on every scrolled
          frame, the same reason trace() is written this way. */
@@ -305,46 +303,113 @@
       requestAnimationFrame(mark);
     }
 
-    rail.addEventListener('scroll', queue, { passive: true });
-    addEventListener('resize', queue);
-
     function go(i) {
-      /* scrollLeft rather than scrollIntoView, which walks up the ancestors
-         and scrolls the page as well as the strip. The section is already on
-         screen when a dot is pressed. */
+      /* Clamped, because the wheel and the arrow keys both ask for at ± 1 and
+         the ends of the list are exactly where a reader pushes hardest.
+         scrollLeft rather than scrollIntoView, which walks up the ancestors and
+         scrolls the page as well as the rail. */
+      i = Math.max(0, Math.min(cards.length - 1, i));
       rail.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
     }
 
-    /* The strip is the height of the piece being shown. Every card stretched
-       to the longest one before this, so nine of the ten ended in a panel of
-       nothing; the transition on .wr-strip is what keeps the dots from jumping
-       between two positions as it changes.
-
-       Recomputed on resize and on a language switch, which is the case with no
-       event of its own: applyLang rewrites the paragraphs, so a card's height
+    /* The rail is the height of the card being shown, where the caller asks
+       for it. Recomputed on resize and on a language switch, which is the case
+       with no event of its own: applyLang rewrites the text, so a card's height
        changes without its box ever being resized and a ResizeObserver would
        never fire. */
     function size() {
-      if (at < 0 || !cards[at]) return;
+      if (!opts.fit || at < 0 || !cards[at] || !live) return;
       rail.style.height = cards[at].offsetHeight + 'px';
     }
 
-    addEventListener('resize', size);
-    window.__wrSize = size;
+    /* ONE GESTURE MOVES ONE CARD, and this is why the wheel is taken over
+       rather than left to CSS. `scroll-snap-stop: always` is set and it holds
+       for a touch swipe and for a single wheel notch, but a trackpad fling
+       arrives as a long burst of deltas: the rail travels past several snap
+       points and then settles on whichever is nearest, which is Mehdi's report
+       that it scrolls too far and does not stop at the next card. Headless
+       cannot reproduce inertia, so this is not something a test would have
+       caught.
+
+       Only a horizontally dominant gesture is taken. A vertical wheel over the
+       rail belongs to the page, and it was verified to reach it: the rail must
+       never become a place where the page stops scrolling. */
+    var busy = false, quiet;
+    rail.addEventListener('wheel', function (e) {
+      /* A pager that is standing down is not a scroller, and swallowing a
+         sideways gesture over one would be taking an input it cannot use. */
+      if (!live) return;
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      /* The lock lifts on a quiet gap rather than on a timer, or the tail of
+         one fling is read as the start of the next. */
+      clearTimeout(quiet);
+      quiet = setTimeout(function () { busy = false; }, 140);
+      if (busy || Math.abs(e.deltaX) < 8) return;
+      busy = true;
+      go(at + (e.deltaX > 0 ? 1 : -1));
+    }, { passive: false });
+
+    rail.addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', function () { queue(); size(); });
 
     dots.forEach(function (d, i) {
       d.addEventListener('click', function () { go(i); });
     });
 
-    /* A card takes a tab stop, so tabbing to one has to page the strip to it.
+    /* A card takes a tab stop, so tabbing to one has to page the rail to it.
        The browser still nudges the page a little to bring the focused card
        fully into view, which is its own behaviour and is left alone. */
     cards.forEach(function (c, i) {
-      c.addEventListener('focus', function () { go(i); });
+      if (c.tabIndex >= 0) c.addEventListener('focus', function () { go(i); });
     });
 
     mark();
-  })();
+
+    return {
+      refresh: function () { at = -1; mark(); },
+      /* The skills deck only pages on a phone, so its pager has to be able to
+         stand down and give the height back rather than be rebuilt. */
+      enable: function (on) {
+        live = on;
+        if (on) { at = -1; mark(); }
+        else { rail.style.height = ''; dots.forEach(function (d) { d.classList.remove('is-on'); }); }
+      }
+    };
+  }
+
+  var wrPager = pager(
+    document.querySelector('.wr-strip'),
+    document.querySelector('.wr-dots'),
+    '.wr-c',
+    { fit: true }
+  );
+
+  /* The skills deck pages on a phone and nowhere else. Above 620px it is two
+     columns, which uses the width better than one card at a time would, and on
+     the desktop it is the hover deck it has always been. So the pager is built
+     once and stood down outside that width rather than rebuilt on every
+     resize. 620px is the number the stylesheet already breaks on and the two
+     have to move together. */
+  var skPager = pager(
+    document.querySelector('.skx'),
+    document.querySelector('.skx-dots'),
+    '.skx-c',
+    { fit: true }
+  );
+  if (skPager) {
+    var phone = matchMedia('(max-width:620px)');
+    var syncSk = function () { skPager.enable(phone.matches); };
+    if (phone.addEventListener) phone.addEventListener('change', syncSk);
+    syncSk();
+  }
+
+  /* French runs about a third longer, so every card is a different height and
+     both rails have to be remeasured. applyLang has no event of its own. */
+  window.__wrSize = function () {
+    if (wrPager) wrPager.refresh();
+    if (skPager) skPager.refresh();
+  };
 
   /*  motion  */
 
