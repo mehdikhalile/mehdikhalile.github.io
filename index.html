@@ -24,7 +24,7 @@
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://mehdikhalile.github.io/">
 <meta property="og:title" content="Mehdi Khalile, Marketing &amp; Strategy">
-<meta property="og:description" content="Market analysis turned into plans a team can actually execute. Casablanca, Morocco. Open to opportunities.">
+<meta property="og:description" content="Market analysis turned into plans a team can actually execute. Casablanca, Morocco. Available immediately.">
 <meta property="og:image" content="https://mehdikhalile.github.io/img/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -64,6 +64,11 @@
     <a href="#profile"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c.6-3.8 3.6-5.8 7.2-5.8s6.6 2 7.2 5.8"/></svg></i><span class="bn-t" data-fr="Profil">Profile</span></a>
     <a href="#journey"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.4v17.2"/><circle cx="7" cy="7.2" r="2"/><circle cx="7" cy="16.4" r="2"/><path d="M11.4 7.2h8M11.4 16.4h6"/></svg></i><span class="bn-t" data-fr="Parcours">Journey</span></a>
     <a href="#projects"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 8.4 12 4.2l8.6 4.2L12 12.6 3.4 8.4Z"/><path d="M3.4 12.6 12 16.8l8.6-4.2"/><path d="M3.4 16.6 12 20.8l8.6-4.2"/></svg></i><span class="bn-t" data-fr="Projets">Projects</span></a>
+    <!-- A page with its lines. It sits between Projects and Skills because the
+         order of this list IS the order the current-section logic walks: secs
+         is built by mapping these hrefs, so an entry out of place reports the
+         wrong section for the whole run of the page below it. -->
+    <a href="#writing"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 3.6h7.4l4.2 4.2v12.6H6.2Z"/><path d="M13.4 3.8v4.2h4"/><path d="M9.2 12.4h5.6M9.2 16.2h4"/></svg></i><span class="bn-t" data-fr="De moi à vous">From me to you</span></a>
     <a href="#skills"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 18.6a9 9 0 1 1 16.8 0"/><path d="M12 18.6 16 11"/><circle cx="12" cy="18.6" r="1.5"/></svg></i><span class="bn-t" data-fr="Compétences">Skills</span></a>
     <a href="#contact"><i class="bn-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="M2.8 7 12 13.2 21.2 7"/></svg></i><span class="bn-t" data-fr="Contact">Contact</span></a>
   </nav>
@@ -193,7 +198,7 @@
 
       <p class="mono kicker">
         <span class="live" aria-hidden="true"></span>
-        <span class="k-t" data-fr="Ouvert aux opportunités">Open to opportunities</span>
+        <span class="k-t" data-fr="Disponible immédiatement">Available immediately</span>
         <span class="dot"></span>
         <span class="k-t" data-fr="Casablanca, Maroc">Casablanca, Morocco</span>
       </p>
@@ -488,8 +493,13 @@
             <p class="mono tl-y">2026</p>
             <div class="tl-c">
               <span class="mono kind" data-fr="Aujourd’hui">Now</span>
-              <h3 data-fr="Ouvert aux opportunités">Open to opportunities</h3>
-              <p class="say" data-fr="Marketing, analyse et coordination, avec l’IA comme outil de travail quotidien. Le plus simple est un email, je réponds sous 24 heures.">Marketing, analysis and coordination, with AI as a daily working tool. Email is the fastest route, I reply within 24 hours.</p>
+              <!-- The substantive version of the ask lives here rather than in
+                   the contact block, which is held to one phone screen and has
+                   7px of room left at 375x460. A reader arrives at this node
+                   having just read the whole history, so it is the right place
+                   to say what comes next. -->
+              <h3 data-fr="Disponible immédiatement">Available immediately</h3>
+              <p class="say" data-fr="Je recherche des postes en analyse de marché, stratégie et coordination de projets, avec l’IA comme outil de travail quotidien. Le plus simple est un email, je réponds sous 24 heures.">Looking for roles in market analysis, strategy and project coordination, with AI as a daily working tool. Email is the fastest route, I reply within 24 hours.</p>
               <a class="btn btn-solid tl-cta" href="https://mail.google.com/mail/?extsrc=mailto&amp;url=mailto%3Ameehdikhalile%40gmail.com" target="_blank" rel="noopener" data-fr="Me contacter">Get in touch</a>
             </div>
           </li>
@@ -849,7 +859,12 @@
       <div class="end-say">
         <p class="mono end-lab" data-fr="Contact">Contact</p>
 
-        <p class="statement statement-c" data-fr="Ouvert aux opportunités.">Open to opportunities.</p>
+        <!-- Same length as the line it replaced, which is why it is this
+             wording and not a longer one: measured at 0px delta and the same
+             line count in both languages at 390x664, 360x600, 375x460 and
+             1440x900. This block and the footer have to fit one phone screen
+             and there are 7px spare on the smallest of them. -->
+        <p class="statement statement-c" data-fr="Disponible immédiatement.">Available immediately.</p>
 
         <a class="mail rv" href="mailto:meehdikhalile@gmail.com">meehdikhalile@gmail.com</a>
 
