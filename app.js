@@ -44,6 +44,7 @@
       el.setAttribute('aria-label', fr ? el.dataset.frLabel : el.dataset.enLabel);
     });
 
+
     root.lang = fr ? 'fr' : 'en';
 
     var meta = LANG_META[fr ? 'fr' : 'en'];
@@ -78,6 +79,10 @@
     // The statement is a different sentence in French, so its words have to be
     // cut again and their scrub range re-measured.
     if (window.__statements) window.__statements();
+
+    // French runs about a third longer, so a piece is a different height here
+    // and the strip around it has to be remeasured. Nothing else tells it to.
+    if (window.__wrSize) window.__wrSize();
 
     // French runs about a third longer, so the journey track is a different
     // width in each language and the pin has to be measured again.
@@ -249,6 +254,97 @@
       if (e.animationName === 'lag') cord.classList.remove('pull');
     });
   }
+
+  /*  the writing strip
+
+     One piece fills the column and the dots say where you are in the ten.
+     There is no open card and no closed one, so this only reports a position;
+     the previous version had to mark the centred card as different from its
+     neighbours and that marking was the thing that looked wrong while it
+     moved.
+
+     It runs under reduced motion too. Knowing which of ten you are looking at
+     is the section working, not an arrival effect. With no script at all the
+     strip is still a scroller and every piece is still readable, which is why
+     nothing here writes the text. */
+  (function strip() {
+    var rail = document.querySelector('.wr-strip');
+    var dotBox = document.querySelector('.wr-dots');
+    if (!rail || !dotBox) return;
+    var cards = [].slice.call(rail.querySelectorAll('.wr-c'));
+    var dots = [].slice.call(dotBox.querySelectorAll('.wr-dot'));
+    if (!cards.length || dots.length !== cards.length) return;
+
+    var at = -1, queued = false;
+
+    function mark() {
+      queued = false;
+      /* Every rect in one pass, then the classes in a second. Interleaving is
+         a forced reflow per card per frame and this runs on every scrolled
+         frame, the same reason trace() is written this way. */
+      var box = rail.getBoundingClientRect();
+      var mid = box.left + box.width / 2;
+      var best = 0, bestD = Infinity, i, r, d;
+      for (i = 0; i < cards.length; i++) {
+        r = cards[i].getBoundingClientRect();
+        d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      if (best === at) return;
+      at = best;
+      for (i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('is-on', i === at);
+        dots[i].setAttribute('aria-current', i === at ? 'true' : 'false');
+      }
+      size();
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(mark);
+    }
+
+    rail.addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+
+    function go(i) {
+      /* scrollLeft rather than scrollIntoView, which walks up the ancestors
+         and scrolls the page as well as the strip. The section is already on
+         screen when a dot is pressed. */
+      rail.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+    }
+
+    /* The strip is the height of the piece being shown. Every card stretched
+       to the longest one before this, so nine of the ten ended in a panel of
+       nothing; the transition on .wr-strip is what keeps the dots from jumping
+       between two positions as it changes.
+
+       Recomputed on resize and on a language switch, which is the case with no
+       event of its own: applyLang rewrites the paragraphs, so a card's height
+       changes without its box ever being resized and a ResizeObserver would
+       never fire. */
+    function size() {
+      if (at < 0 || !cards[at]) return;
+      rail.style.height = cards[at].offsetHeight + 'px';
+    }
+
+    addEventListener('resize', size);
+    window.__wrSize = size;
+
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { go(i); });
+    });
+
+    /* A card takes a tab stop, so tabbing to one has to page the strip to it.
+       The browser still nudges the page a little to bring the focused card
+       fully into view, which is its own behaviour and is left alone. */
+    cards.forEach(function (c, i) {
+      c.addEventListener('focus', function () { go(i); });
+    });
+
+    mark();
+  })();
 
   /*  motion  */
 

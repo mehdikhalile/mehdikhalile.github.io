@@ -1040,7 +1040,96 @@ html[lang="fr"] .statement{max-width:33ch}
 .case .who{margin-top:10px;font-size:.86rem;color:var(--accent)}
 .case-p{margin-top:14px;font-size:.94rem;line-height:1.6;color:var(--ink-2)}
 
-/*  04 skills 
+/*  04 writing
+   One piece at a time, filling the column beside the portrait, paged sideways
+   with dots under it.
+
+   It was a strip of part-visible cards and both complaints about it had one
+   cause. It opened with a card centred and nothing to its left, and the card
+   closing behind you collapsed its text as it went. Showing several at once
+   meant the open one had to be marked as different from its neighbours, and
+   that marking is what looked wrong while it moved. One card at a time needs
+   no open state, so there is nothing left to animate.
+
+   The page is never pinned to do it. The journey was a pinned horizontal rail
+   once and it went precisely because holding the viewport for a screen and a
+   half is what "the scroll is slow" turned out to mean. */
+.wr-wrap{margin-top:clamp(22px,2.6vw,34px)}
+.wr-strip{
+  display:flex;
+  /* Each card is its own height. Stretched, every one was as tall as the
+     longest piece and the nine shorter ones ended in a panel of nothing. */
+  align-items:flex-start;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  /* The dots are the indicator, so the bar is not. It said the same thing
+     worse and sat across the foot of a card somebody was reading. Both rules
+     are needed: the standard property and the WebKit pseudo-element. */
+  scrollbar-width:none;
+}
+.wr-strip::-webkit-scrollbar{display:none}
+.wr-c{
+  flex:0 0 100%;width:100%;min-width:0;
+  scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;
+  padding:clamp(22px,2.4vw,34px) clamp(20px,2.2vw,34px);
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+}
+.wr-c:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* The academic project card's colouring, because they are the same kind of
+   object: an outline numeral in the accent, the subject line in the accent
+   under the title, and the body in --ink-2. Without it the card was a white
+   heading over grey text and was the only panel on the page carrying no accent
+   at all.
+
+   The numeral is this section's order and not the order the pieces were
+   published, which is why it is allowed here. See writing.mjs. */
+.wr-n{
+  display:block;font-family:var(--display);font-weight:700;
+  font-size:clamp(2rem,2.8vw,2.9rem);line-height:.8;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1.4px var(--accent);
+  margin-bottom:clamp(12px,1.4vw,18px);
+}
+@supports not (-webkit-text-stroke: 1px black){ .wr-n{color:var(--accent)} }
+.wr-c h3{
+  font-family:var(--display);font-weight:500;letter-spacing:-.026em;line-height:1.16;
+  font-size:clamp(1.16rem,1.6vw,1.5rem);
+}
+.wr-k{margin-top:10px;font-size:.86rem;color:var(--accent)}
+.wr-t{margin-top:clamp(12px,1.4vw,18px)}
+.wr-t p{margin-top:11px;font-size:.94rem;line-height:1.62;color:var(--ink-2)}
+.wr-t p:first-child{margin-top:0}
+
+/* The strip is the height of the piece on screen, not of the longest one.
+   app.js sets it as the card changes; the transition is what stops the dots
+   jumping from one position to another. Without a script there is no inline
+   height and the strip falls back to the tallest card, which is correct and
+   simply less tidy. */
+.js .wr-strip{transition:height .38s var(--ease)}
+
+/* Instagram's dots. A count and a position, which is what the scrollbar was
+   doing badly, and the only control the section has. */
+.wr-dots{
+  display:flex;justify-content:center;align-items:center;
+  gap:9px;margin-top:clamp(16px,1.8vw,22px);
+}
+.wr-dot{
+  width:7px;height:7px;padding:0;border:0;border-radius:50%;
+  background:var(--line-2);cursor:pointer;
+  transition:background .3s var(--ease),transform .3s var(--ease);
+}
+.wr-dot:hover{background:var(--ink-3)}
+/* It grows as well as taking the accent, because a colour change on a 7px dot
+   says nothing to a reader who cannot separate the two. */
+.wr-dot.is-on{background:var(--accent);transform:scale(1.45)}
+.wr-dot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+@media (max-width:760px){
+  .wr-dots{gap:8px}
+}
+
+/*  05 skills
    Two rows gliding in opposite directions, holding on hover. Each row carries
    its set twice and travels exactly half its own width, which is the only way
    the loop has no seam. app.js sets --dur per row from its measured width so
@@ -1501,7 +1590,7 @@ html[lang="fr"] .statement{max-width:33ch}
   .case:hover,.case:focus-within{transform:none;box-shadow:none}
 }
 
-/*  05 contact
+/*  06 contact
    The ask on the left, the ways to reach him on the right, and the name once
    across the foot. It was centred, which said "this is the end", but it put the
    four details in a strip under the buttons where they read as a footer the page
@@ -2178,6 +2267,35 @@ html[lang="fr"] .signoff{letter-spacing:-.045em}
   .case{padding:9pt;border-radius:6pt}
   .case-n{font-size:18pt;margin-bottom:6pt;-webkit-text-stroke:0;color:#000}
   .case-p{padding-top:0;font-size:9.4pt}
+  /* Titles only. Ten pieces at 140 words each is about three extra pages, and
+     a CV that prints to seven pages because of its reading list is a CV nobody
+     reaches the end of. The scroller flattens to a plain stack.
+
+     Written against .js as well as the bare class. The screen rule that sets
+     the card height is .js-prefixed, so a bare selector here loses to it and
+     the sheet keeps a 505px scroller holding one piece of ten. Same
+     specificity trap the skills deck hit on :first-child. */
+  /* height carries !important because app.js writes the strip's height as an
+     inline style to follow the card on screen, and an inline style beats a
+     stylesheet rule however specific it is. Without it the sheet prints one
+     card's worth of height with ten cards stacked inside it. */
+  .js .wr-strip,.wr-strip{
+    display:block;height:auto !important;overflow:visible;padding:0;margin-top:6pt;
+  }
+  .js .wr-c,.wr-c{
+    display:block;width:auto;background:none;box-shadow:none;
+    border:0;border-radius:0;padding:0;margin:0 0 4pt;break-inside:avoid;
+  }
+  .wr-c h3{font-size:10pt}
+  /* Same treatment the project numeral takes on paper: solid, small and black.
+     An outline numeral in the accent is a screen device and prints as a hollow
+     grey shape twice the size of the title under it. */
+  .wr-n{font-size:12pt;margin-bottom:2pt;-webkit-text-stroke:0;color:#000}
+  .wr-k{font-size:8.4pt;color:#000;margin-top:1pt}
+  /* The pieces themselves go, and the dots with them: a dot is a control for
+     paging through something the paper has already laid flat. */
+  .wr-t{display:none}
+  .wr-dots{display:none}
   /* Paper has no pointer, so the deck is four columns with everything open, and
      the card surfaces flatten to a rule each. display and height have to be
      reset explicitly: the screen rule is a flex row of a fixed height and print
