@@ -879,6 +879,10 @@ html[lang="fr"] .statement{max-width:33ch}
    is invisible. */
 .mark{display:block;height:26px}
 .mark img{height:100%;width:auto;max-width:none}
+/* A mark that is one flat colour ships as inline SVG on var(--ink) instead,
+   which is exactly what the dark raster variants are lifted to, and gets the
+   print theme's pure black for free. No second file, nothing to keep in step. */
+.mark svg{display:block;height:100%;width:auto;fill:var(--ink)}
 .mark .dk{display:none}
 :root[data-theme="dark"] .mark .lt{display:none}
 :root[data-theme="dark"] .mark .dk{display:block}
